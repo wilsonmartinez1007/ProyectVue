@@ -1,0 +1,50 @@
+# =====================================================================
+# FRONTEND: vueConBack/vueProyectComplete
+# =====================================================================
+vueConBack/vueProyectComplete/node_modules/
+vueConBack/vueProyectComplete/dist/
+vueConBack/vueProyectComplete/dist-ssr/
+vueConBack/vueProyectComplete/.local
+vueConBack/vueProyectComplete/.vite/
+vueConBack/vueProyectComplete/.eslintcache
+
+# Logs de empaquetadores en el frontend
+vueConBack/vueProyectComplete/*.log
+vueConBack/vueProyectComplete/npm-debug.log*
+vueConBack/vueProyectComplete/yarn-debug.log*
+vueConBack/vueProyectComplete/yarn-error.log*
+vueConBack/vueProyectComplete/pnpm-debug.log*
+
+# Variables de entorno del Frontend
+vueConBack/vueProyectComplete/.env.local
+vueConBack/vueProyectComplete/.env.*.local
+vueConBack/vueProyectComplete/.env.production
+
+
+# =====================================================================
+# BACKEND: backPhp (PHP Puro con arquitectura MVC)
+# =====================================================================
+backPhp/vendor/
+backPhp/composer.phar
+backPhp/.phpunit.result.cache
+backPhp/.php_cs.cache
+
+# Variables de entorno y configuraciones locales del Backend
+backPhp/.env
+backPhp/config.local.php
+
+
+# =====================================================================
+# CONFIGURACIONES DE EDITORES Y SISTEMA (Global)
+# =====================================================================
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.suo
+*.sw?
+
+# Archivos basura del sistema operativo
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
