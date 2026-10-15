@@ -1,4 +1,5 @@
 <?php
+require_once '../models/ProductosModel.php';
 class ProductController{
     private array $productos =[
         ["id"=>1, "nombre"=>"Teclado","precio"=>3480],
@@ -8,8 +9,10 @@ class ProductController{
     ];
     //get api/productos
     public function index(): void{
+        $model = new ProductosModel();
+        $productosdb = $model->obtenerProductos();
         http_response_code(200);
-        echo json_encode($this->productos);
+        echo json_encode($productosdb);
     }
     //delete api/productos/{id}
     public function destroy(int $id): void{
