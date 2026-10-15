@@ -1,16 +1,50 @@
 import {defineStore} from 'pinia'
-import {ref, } from 'vue'
+import {ref, computed} from 'vue'
 import { toast } from 'vue-sonner'
 export interface Producto {
     "id": number,
     "name": string,
+    "cantidad":number,
     "price":number,
+}
+export interface Ventas{
+    "id": number,
+    "name":string,
+    "totalVnetas": number,
 }
 
 export const store = defineStore('producto',()=>{
     const produc = ref<Producto[]>([])
+    const ventas = ref<Ventas[]>([])
     const cargando = ref(false)
     const error = ref<Error|null>(null)
+    const cantProductos = ref(produc.value.length)
+
+    
+   const unidadesdeTotales = computed(()=>{
+        return produc.value.reduce((a,p)=>{
+            return a+p.cantidad
+        },0)
+   })
+    
+
+    const acumuladoVentas = computed(()=>{
+        return produc.value.reduce((acumulador,producto)=>{
+            return acumulador + producto.cantidad
+            },0)
+                }
+             )
+    const rotacionC =computed(()=>{
+            return produc.value.map((c: any)=>({
+                id: c.id,
+                name: c.name,
+                cantidad: Math.floor((c.cantidad/acumuladoVentas.value)*100*100)/100,
+                price:c.precio,
+            }))
+           
+    })
+    
+           
     
 
     //action
@@ -27,8 +61,20 @@ export const store = defineStore('producto',()=>{
             produc.value = cambioRespuesta.map((p: any)=>({
                 id: p.id,
                 name: p.nombre,
-                price:p.precio,
+                cantidad: p.cantidadVendidos,
+                price: p.precio,
             }))
+            
+            
+            ventas.value = cambioRespuesta.map((c: any)=>({
+                id: c.id,
+                name: c.nombre,
+                totalVentas: c.cantidadVendidos*c.precio,
+            }))
+           
+            
+            console.log("produc",produc.value)
+            console.log("venfas",ventas.value)
         }catch(e){
             if( e instanceof Error && e.name !== "AbortError")
             error.value=e
@@ -59,6 +105,11 @@ export const store = defineStore('producto',()=>{
         produc,
         cargar,
         eliminar,
-        error
+        acumuladoVentas,
+        rotacionC,
+        error,
+        ventas,
+        cantProductos,
+        unidadesdeTotales
     }
 })
