@@ -9,6 +9,8 @@ import { BarChart } from 'echarts/charts'
 import { TitleComponent, TooltipComponent, GridComponent, DatasetComponent } from 'echarts/components'
 import VChart from 'vue-echarts'
 
+//imagen
+import fondo from './assets/fondo.png'
 
 use([
   CanvasRenderer,
@@ -57,7 +59,7 @@ const option = computed(()=>({
         y: "totalVentas"
       },
       itemStyle:{
-        color: '#42b883'
+        color: '#FF6347'
       }
     }
   ]
@@ -92,7 +94,7 @@ const clasificacion = computed(()=>({
       
       itemStyle:{
         padding:'10px',
-        color: '#42b883'
+        color: '#FF6347'
       }
     }
   ]
@@ -125,7 +127,7 @@ const ventasandPromedio = computed(()=>({
         y: "cantidad"
       },
       itemStyle:{
-        color: '#42b883'
+        color: '#FF6347'
       }
     }
   ]
@@ -139,13 +141,15 @@ const ventasandPromedio = computed(()=>({
 <template>
   
     <div >
+      <div class="caja"></div>
       
       <section v-if="seccionAcual===0">
-        <div class="borde">
+        <div class="borde"  >
+          <img :src="fondo" alt="Logo del proyecto" class="img">
           <div class="centrar">
-          <h1 class="titulo">Bienvenido al reporte de productos</h1>
-          
-            <button class="botonC" @click="seccionAcual=1">Comenzar</button>
+          <h1 class="titulo">SATLOCK</h1>
+            <p class="texto">Holaa, aqui podras ver los graficos <br>con la información de tus ventas  </p>
+            <button class="botonC" @click="seccionAcual=1">Mostrar graficos con chard</button>
           
           
           </div>
@@ -223,6 +227,17 @@ const ventasandPromedio = computed(()=>({
 </template>
 
 <style scoped>
+.texto{
+  font-size: large;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  color: #ccc;
+}
+  .caja{
+    border: none;
+    width: 100%;
+    background-color: #FF6347;
+
+  }
   
   .chart-container {
     width: 100%;
@@ -234,44 +249,63 @@ const ventasandPromedio = computed(()=>({
     width: 100%;
     height: 100%;
   }
+  .img{
+    display: block;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
   .centrar{
    
     display: flex;
-    margin-top: 15%;
-    margin-bottom: 15%;
+    width: 70%;
     padding: 0 2rem;
     flex-direction: column;
-    align-items: center;
+    align-items:center;
+    margin-top: 100px;
+    position: absolute;
   }
   .titulo{
     font-size: 35px;
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color:#FF6347;
+    
   }
   .botonC{
     margin-top: 1rem;
     height: 50px;
     width: 100%;
     border-radius: 11px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color:#ccc;
     border: none;
-    background-color: rgba(250, 120, 14, 0.582);
-    font-size:medium;
-    transition: transform 0.3 ease, box-shadow 0.3s ease;
+    background-color: transparent;
+    font-size:large;
+    text-decoration: underline;
+    transition: color 0.3s ease;
 
   }
-  .botonC:hover {
-  transform: translateY(-8px); 
-  box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.15); 
-}
+  .botonC:hover{
+    color: #FF6347;
+  }
+  
   .borde{
-    border: solid .6rem rgba(250, 120, 14, 0.582);
+    border: none;
+    background-color: rgba(68, 18, 18, 0.314);
     border-radius: 20px;
     display: flex;
     justify-content: center;
-    margin-top: 20%;
+    margin-top: 10%;
     padding: 0 2rem;
+    width: 600px;
+    transition: transform 0.3 ease, box-shadow 0.3s ease;
     
 
   }
+  .borde:hover {
+  transform: translateY(-8px); 
+  box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.15); 
+}
   .divisionPantalla{
     display:grid;
     grid-template-columns: repeat(3,1fr);
