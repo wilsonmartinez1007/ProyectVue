@@ -18,9 +18,10 @@ export const store = defineStore('producto',()=>{
     const ventas = ref<Ventas[]>([])
     const cargando = ref(false)
     const error = ref<Error|null>(null)
-    const cantProductos = ref(produc.value.length)
 
-    
+    const cantProductos = computed(()=>{
+        return produc.value.length
+    })
    const unidadesdeTotales = computed(()=>{
         return produc.value.reduce((a,p)=>{
             return a+p.cantidad
@@ -42,6 +43,9 @@ export const store = defineStore('producto',()=>{
                 price:c.precio,
             }))
            
+    })
+    const promedio = computed(()=>{
+        return unidadesdeTotales.value/cantProductos.value
     })
     
            
@@ -110,6 +114,7 @@ export const store = defineStore('producto',()=>{
         error,
         ventas,
         cantProductos,
-        unidadesdeTotales
+        unidadesdeTotales,
+        promedio
     }
 })

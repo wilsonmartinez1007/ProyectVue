@@ -104,14 +104,14 @@ const clasificacion = computed(()=>({
 )
 const ventasandPromedio = computed(()=>({
   title: {
-    text:"Clasificacion de Productos por rotacion",
+    text:"Cantidad de ventas por producto",
     left:"center"
   },
   tooltip:{
     trgger:"axis"
   },
   dataset:{
-    source:productos.p
+    source:productos.produc
   },
   xAxis:{
     type:'category'
@@ -128,6 +128,23 @@ const ventasandPromedio = computed(()=>({
       },
       itemStyle:{
         color: '#FF6347'
+      },
+      markLine: {
+        silent: true,
+        symbol: ['none','none'],
+        label:{
+          show: true,
+          position: 'end',
+          formatter: `Prmedio general (${productos.promedio})`
+        },
+        lineStyle:{
+          color: '#ff4d4f',
+          type: 'dashed',
+          width: 2
+        },
+        data:[{
+          yAxis:productos.promedio
+        }]
       }
     }
   ]
@@ -169,9 +186,14 @@ const ventasandPromedio = computed(()=>({
               /><p v-else>Cargandodooo</p>
             
           </div>
+          <div class="chart-container">
+            <v-chart v-if="productos.rotacionC.length>0" class="chart" :option="ventasandPromedio" autoforesize 
+              /><p v-else>Cargandodooo</p>
+            
+          </div>
         </div>
         
-        <h1>Promedio: {{ productos.unidadesdeTotales/productos.produc.length }}</h1>
+        <h1>Promedio: {{ productos.promedio }}</h1>
       <button @click="seccionAcual=0">salir</button>
     </section>
     </div>
