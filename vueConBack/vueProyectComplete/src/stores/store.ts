@@ -1,21 +1,12 @@
 import {defineStore} from 'pinia'
 import {ref, computed} from 'vue'
 import { toast } from 'vue-sonner'
-export interface Producto {
-    "id": number,
-    "name": string,
-    "cantidad":number,
-    "price":number,
-}
-export interface Ventas{
-    "id": number,
-    "name":string,
-    "totalVnetas": number,
-}
+import { getProductosAPI } from '@/servicies/serviceProduct'
+import type {Producto} from '@/types/interfaces'
+
 
 export const store = defineStore('producto',()=>{
     const produc = ref<Producto[]>([])
-    const ventas = ref<Ventas[]>([])
     const cargando = ref(false)
     const error = ref<Error|null>(null)
 
@@ -44,8 +35,15 @@ export const store = defineStore('producto',()=>{
             }))
            
     })
+     const ventas = computed(()=>{
+        return produc.value.map((p:any)=>({
+            id: p.id,
+            name: p.name,
+            totalVentas: p.cantidad*p.price,
+        }))
+     })
     const promedio = computed(()=>{
-        return unidadesdeTotales.value/cantProductos.value
+        return (unidadesdeTotales.value/cantProductos.value).toFixed(0)
     })
     
            
@@ -56,29 +54,20 @@ export const store = defineStore('producto',()=>{
         cargando.value=true
         error.value = null
         try{
-            const respuesta = await fetch('http://localhost:8000/api/productos',{method:'GET'})
-            if (!respuesta.ok) {
-                throw new Error(`Error HTTP: ${respuesta.status}`)
-                }
+            const datos = await getProductosAPI();
             
-            const cambioRespuesta = await respuesta.json()
-            produc.value = cambioRespuesta.map((p: any)=>({
+           
+            produc.value = datos.map((p: any)=>({
                 id: p.id,
                 name: p.nombre,
                 cantidad: p.cantidadVendidos,
                 price: p.precio,
             }))
             
-            
-            ventas.value = cambioRespuesta.map((c: any)=>({
-                id: c.id,
-                name: c.nombre,
-                totalVentas: c.cantidadVendidos*c.precio,
-            }))
+        
            
             
-            console.log("produc",produc.value)
-            console.log("venfas",ventas.value)
+            
         }catch(e){
             if( e instanceof Error && e.name !== "AbortError")
             error.value=e
@@ -111,8 +100,8 @@ export const store = defineStore('producto',()=>{
         eliminar,
         acumuladoVentas,
         rotacionC,
-        error,
         ventas,
+        error,
         cantProductos,
         unidadesdeTotales,
         promedio

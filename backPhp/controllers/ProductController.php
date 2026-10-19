@@ -1,5 +1,5 @@
 <?php
-require_once '../models/ProductosModel.php';
+require_once 'models/ProductosModel.php';
 class ProductController{
     private array $productos =[
         ["id"=>1, "nombre"=>"Teclado","precio"=>3480],

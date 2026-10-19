@@ -12,8 +12,8 @@ if ($_SERVER['REQUEST_METHOD']==='OPTIONS'){
     exit;
 }
 
-require_once 'Router.php';
-require_once 'ProductController.php';
+require_once 'routes/Router.php';
+require_once 'controllers/ProductController.php';
 
 $router = new Router();
 
