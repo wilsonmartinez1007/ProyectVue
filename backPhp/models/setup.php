@@ -13,14 +13,15 @@ try {
 
     )";
     $db->exec($sql);
+    
     //INSERTO PRODUCTO
     $checkStmt = $db->query("SELECT COUNT(*) FROM productos");
     $total = $checkStmt->fetchColumn();
     if($total==0){
         $sqlInsert = "INSERT INTO productos (nombre,cantidadVendidos, precio) VALUES
-        ('Teclado',5,142800), 
-        ('Mouse',1,42800), 
-        ('Pantalla',6,714800), 
+        ('Teclado',50,142800), 
+        ('Mouse',100,42800), 
+        ('Pantalla',60,714800), 
         ('Audifonos',455,34800), 
         ('Soporte',20,14800), 
         ('Portatil',59,1064800), 
