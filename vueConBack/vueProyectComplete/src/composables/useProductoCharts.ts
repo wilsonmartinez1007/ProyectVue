@@ -112,7 +112,7 @@ const clasificacion = computed(()=>({
                 textAlign:'center',
                 textVerticalAlign: 'middle',
                 fontSize:24,
-                fontWeigth: 'bold',
+                fontWeight: 'bold',
                 fill:'#333'
             }
         }
@@ -157,7 +157,7 @@ const ventasandPromedio = computed(()=>({
   },
   grid:{
     left : '10%',
-    rigth : '20%',
+    right : '20%',
     bottom: '15%',
     top: '15%',
     containLabel: true
