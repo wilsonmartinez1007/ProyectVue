@@ -34,7 +34,7 @@ const actualizarPorcentaje = (params) => {
     
 const option = computed(()=>({
   title: {
-    text:"Ventas totales por producto",
+    text:"Ingresos por producto",
     left:"center"
   },
   tooltip:{
@@ -55,7 +55,8 @@ const option = computed(()=>({
   
   },
   yAxis:{
-    type: 'value'
+    type: 'value',
+    name: 'Dinero optenido por producto'
   },
   series:[
     { name:'ventas',
@@ -65,7 +66,7 @@ const option = computed(()=>({
         y: "totalVentas"
       },
       itemStyle:{
-        color: '#FF6347',
+        color: '#e459dde5',
       },
       emphasis:{
         focus: 'self'
@@ -121,8 +122,8 @@ const clasificacion = computed(()=>({
         { 
         name:'ventas',
         type: 'pie',
-        radius:['40%','70%'],
-        center: ['65%', '55%'],
+        radius:['25%','45%'],
+        center: ['67%', '57%'],
 
         encode:{
             itemName: "name",
@@ -130,7 +131,8 @@ const clasificacion = computed(()=>({
       },
     // No mostrar etiquetas encima de las porciones
     label: {
-          show: false
+          show: true,
+          
         },
       
     itemStyle:{
@@ -142,7 +144,7 @@ const clasificacion = computed(()=>({
         scale :true,
         focus: 'self'
     },
-    color:['#FF6347','black','gray']
+    color:['#3f98b3','black','gray']
     }
   ]
 
@@ -196,7 +198,7 @@ const ventasandPromedio = computed(()=>({
         y: "cantidad"
       },
       itemStyle:{
-        color: '#FF6347'
+        color: '#3f98b3'
       },
       markLine: {
         silent: true,
@@ -207,7 +209,7 @@ const ventasandPromedio = computed(()=>({
           formatter: `Promedio general (${(promedio.value)})`
         },
         lineStyle:{
-          color: '#ff4d4f',
+          color: '#030303',
           type: 'dashed',
           width: 2
         },

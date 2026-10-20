@@ -49,10 +49,10 @@ onMounted(()=>{
       
 
       <div class="divisionPantalla" v-if="cargando=='Exito'">
+        
           <div  class="divisionPantallaFila">
-            <div>
-            <BaseChart :option="clasificacion "  @legendselectchanged="actualizarPorcentaje"/>
-          </div>
+            
+            <h1 class="titulo">SATLOCK</h1>
             
 
             <div class="chart-container">
@@ -66,20 +66,22 @@ onMounted(()=>{
           <div class="divisionPantallaFila">
 
             
-          <div class="bloqueSalir">
-              <button class="botonSalir" @click="seccionAcual=0">salir</button>
-             
-              <h3>
-                Estado Peticion :{{ cargando }}
-              </h3>
-            </div>
-          <div> 
+          
+            <div class="chart-container">
+              
+            <BaseChart :option="clasificacion "  @legendselectchanged="actualizarPorcentaje"/>
+          </div>
+          <div class="chart-container"> 
  
             <BaseChart :option="option"  />
           </div>
           
           </div>
-          
+          <div class="bloqueSalir">
+              <button class="botonSalir" @click="seccionAcual=0">salir</button>
+             
+              
+            </div>
         
       </div>
       <p v-else>
@@ -100,9 +102,10 @@ onMounted(()=>{
 <style scoped>
   .contenedor{
     min-height: 100vh;
-    background-color: #f8f1f1;
+    background-color: #bdbaba;
     
   }
+  
   .section {
     display: flex;
     justify-content: flex-start;
@@ -112,7 +115,6 @@ onMounted(()=>{
   }
   .borde{
     position: relative;
-    background-color: rgba(68, 18, 18, 0.314);
     border-radius: 20px;
     width: 100%;
     max-width: 500px;
@@ -134,7 +136,6 @@ onMounted(()=>{
     justify-content: flex-start;
     padding: 2rem;
     flex-direction: column;
-    background: rgba(0, 0, 0, 0.45);
     text-align:flex-start;
     border-radius: 20px;
     
@@ -149,14 +150,14 @@ onMounted(()=>{
   .botonSalir{
     padding: 0.5rem 1.2rem;
     width: 120px;
-    background-color:rgb(95, 89, 81);
+    background-color:#d8d7d7;
     border-radius: 10px;
-    color:#f5f2f1;
+    color:#000000;
     border: none;
-    font-size: x-large;
+    font-size: 1.6rem;
   }
   .botonSalir:hover{
-    background-color: rgb(144, 158, 158);
+    background-color: rgb(95, 89, 81)
   }
   .texto{
     font-size: 1.7rem;
@@ -170,6 +171,8 @@ onMounted(()=>{
     width: 100%;
     height: 400px;
     min-height: 400px;
+    background-color: white;
+    border-radius: 20px;
   }
 
  
@@ -204,6 +207,8 @@ onMounted(()=>{
   }
   .dasboardSection{
     padding: 4rem;
+    min-height: 100vh;
+    background-color: rgba(3, 3, 3, 0.658);
   }
 
   
@@ -218,14 +223,15 @@ onMounted(()=>{
   }
   .divisionPantallaFila{
     display:grid;
-    grid-template-rows: repeat(auto-fit,minmax(300px,1fr));
+    grid-template-rows: repeat(auto-fit,minmax(350px,1fr));
     gap:20px;
     
 
   }
   .bloqueSalir{
-    padding: 2rem;
-    margin-left:550px;
+    padding: 1rem;
+    margin-left:250px;
+    color:#f5f2f1;
   
 
   }
