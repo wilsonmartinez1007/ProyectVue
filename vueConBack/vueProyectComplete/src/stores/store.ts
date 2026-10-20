@@ -1,23 +1,18 @@
 import {defineStore} from 'pinia'
 import {ref, computed} from 'vue'
-import { toast } from 'vue-sonner'
-import { getProductosAPI } from '@/servicies/serviceProduct'
-import type {Producto} from '@/types/interfaces'
+//import { toast } from 'vue-sonner'
+import { getProductosAPI } from '@/services/serviceProduct'
+import type {Producto, Estado} from '@/types/interfaces'
 
 
 export const store = defineStore('producto',()=>{
     const produc = ref<Producto[]>([])
-    const cargando = ref(false)
-    const error = ref<Error|null>(null)
+    const cargando = ref<Estado|null>(null)
 
     const cantProductos = computed(()=>{
         return produc.value.length
     })
-   const unidadesdeTotales = computed(()=>{
-        return produc.value.reduce((a,p)=>{
-            return a+p.cantidad
-        },0)
-   })
+   
     
 
     const acumuladoVentas = computed(()=>{
@@ -27,23 +22,28 @@ export const store = defineStore('producto',()=>{
                 }
              )
     const rotacionC =computed(()=>{
-            return produc.value.map((c: any)=>({
+        if(acumuladoVentas.value>0){
+            return produc.value.map((c: Producto)=>({
                 id: c.id,
                 name: c.name,
                 cantidad: Math.floor((c.cantidad/acumuladoVentas.value)*100*100)/100,
-                price:c.precio,
+                price:c.price,
             }))
+        }else return[]
+            
            
     })
      const ventas = computed(()=>{
-        return produc.value.map((p:any)=>({
+        return produc.value.map((p:Producto)=>({
             id: p.id,
             name: p.name,
             totalVentas: p.cantidad*p.price,
         }))
      })
     const promedio = computed(()=>{
-        return (unidadesdeTotales.value/cantProductos.value).toFixed(0)
+        if(cantProductos.value>0) return (acumuladoVentas.value/cantProductos.value).toFixed(0)
+            else return 0
+        
     })
     
            
@@ -51,11 +51,10 @@ export const store = defineStore('producto',()=>{
 
     //action
     async function cargar() {
-        cargando.value=true
-        error.value = null
+        cargando.value='Cargando'
+        
         try{
             const datos = await getProductosAPI();
-            
            
             produc.value = datos.map((p: any)=>({
                 id: p.id,
@@ -63,19 +62,17 @@ export const store = defineStore('producto',()=>{
                 cantidad: p.cantidadVendidos,
                 price: p.precio,
             }))
-            
-        
-           
-            
+            cargando.value = 'Exito'                      
             
         }catch(e){
             if( e instanceof Error && e.name !== "AbortError")
-            error.value=e
-            console.log("problema al cargar la API",e)
+                cargando.value = 'Error'
+                
         }finally{
-            cargando.value=false
+            cargando.value='Exito'
         }
     }
+    /*
     async function eliminar(id:number) {
         const estadoAnterior = produc.value
         produc.value = produc.value.filter(c=>c.id!==id)
@@ -90,20 +87,19 @@ export const store = defineStore('producto',()=>{
             toast.error('No se pudo eliminar el producto')
             console.log("problema al enviar la API",e)
         }
-    }
+    }*/
     
 
 
     return {
         produc,
         cargar,
-        eliminar,
+        //eliminar,
         acumuladoVentas,
         rotacionC,
         ventas,
-        error,
+        cargando,
         cantProductos,
-        unidadesdeTotales,
         promedio
     }
 })

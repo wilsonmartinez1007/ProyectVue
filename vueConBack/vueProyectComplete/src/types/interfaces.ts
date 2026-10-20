@@ -4,3 +4,4 @@ export interface Producto {
     "cantidad":number,
     "price":number,
 }
+export type Estado = 'Cargando'|'Exito' |'Error'

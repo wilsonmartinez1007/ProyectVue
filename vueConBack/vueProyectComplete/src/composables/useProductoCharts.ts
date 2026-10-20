@@ -104,7 +104,7 @@ const clasificacion = computed(()=>({
     graphic:[
         {
             type:'text',
-            left:'60%',
+            left:'62.5%',
             top:'55%',
             style:{
                 text:`${porcentajeVisible.value}%`,
@@ -142,7 +142,7 @@ const clasificacion = computed(()=>({
         scale :true,
         focus: 'self'
     },
-    color:['#FF6347','black','blue']
+    color:['#FF6347','black','gray']
     }
   ]
 
@@ -184,6 +184,10 @@ const ventasandPromedio = computed(()=>({
 
     
   },
+  emphasis:{
+        scale :true,
+        focus: 'self'
+    },
   series:[
     { name:'ventas',
       type: 'bar',
