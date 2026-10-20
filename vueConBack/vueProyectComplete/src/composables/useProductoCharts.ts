@@ -105,8 +105,8 @@ const clasificacion = computed(()=>({
     graphic:[
         {
             type:'text',
-            left:'62.5%',
-            top:'55%',
+            left:'50.7%',
+            top:'45%',
             style:{
                 text:`${porcentajeVisible.value}%`,
                 textAlign:'center',
@@ -123,20 +123,19 @@ const clasificacion = computed(()=>({
         name:'ventas',
         type: 'pie',
         radius:['25%','45%'],
-        center: ['67%', '57%'],
+        center: ['55%', '47%'],
 
         encode:{
             itemName: "name",
             value: "cantidad"
       },
-    // No mostrar etiquetas encima de las porciones
+    //mostrar etiquetas encima de las porciones
     label: {
           show: true,
           
         },
       
     itemStyle:{
-        padding:'10px',
         borderColor: '#ffffff',
       },
     //resaltar
