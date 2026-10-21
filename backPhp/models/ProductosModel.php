@@ -14,6 +14,35 @@ class ProductosModel{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         }
+        //creo un producto
+    public function crearUnProducto(string $nombre, int $cantidad, int $precio): bool {
+        $sql = "INSERT INTO productos (nombre, cantidadVendidos, precio) VALUES (:nombre, :cantidadVendidos, :precio)";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([
+            ':nombre'=>$nombre,
+            ':cantidadVendidos'=>$cantidad,
+            ':precio'=>$precio,
+        ]);
+    }
+        //eliminar un producto
+    public function eliminarProducto(int $id): bool {
+        $sql = "DELETE FROM productos WHERE id= :id";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([
+            ':id'=>$id
+        ]);
+    }
+    //actualizar un producto
+    public function actualizarProducto(int $id, string $nombre, int $cantidad, int $precio): bool {
+        $sql = "UPDATE productos SET nombre =:nombre, cantidadVendidos = :cantidad, precio = :precio WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        return $stmt -> execute([
+            ':id'=> $id,
+            'nombre'=>$nombre,
+            ':cantidad'=> $cantidad,
+            ':precio'=> $precio
+        ]);
+    }
     
 
     

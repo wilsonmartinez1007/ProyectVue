@@ -38,6 +38,9 @@ onMounted(()=>{
           <h1 class="titulo">SATLOCK</h1>
             <p class="texto">Holaa, aqui podras ver los graficos con la información de tus ventas  </p>
             <button class="botonC" @click="seccionAcual=1">Mostrar graficos con charts</button>
+            <button @click="productos.crear()">ver si creo</button>
+            <button @click="productos.eliminar()">eliminar</button>
+            <button @click="productos.actualizar()">actualizar</button>
           
           
           </div>

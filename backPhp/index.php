@@ -2,7 +2,7 @@
 
 // Permitir peticiones desde Vue
 header("Access-Control-Allow-Origin: http://localhost:5173");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS, DELETE");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, DELETE,PUT");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json; charset=utf-8");
 
@@ -18,8 +18,10 @@ require_once 'controllers/ProductController.php';
 $router = new Router();
 
 //registro los endpoints
-$router->get('/api/productos',[ProductController::class, 'index']);
-$router->delete('/api/productos/{id}',[ProductController::class,'destroy']);
+$router->get('/api/productos',[ProductController::class, 'leer']);
+$router->delete('/api/productos/{id}',[ProductController::class,'eliminar']);
+$router->post('/api/productos/create',[ProductController::class,'crear']);
+$router->put('/api/productos/actualizar/{id}',[ProductController::class,'actualizar']);
 
 //Porceso la peticion actual
 $router->despachar($_SERVER['REQUEST_METHOD'],$_SERVER['REQUEST_URI']);
