@@ -40,17 +40,18 @@ class ProductController{
             }
         
         
-        $this->model->crearUnProducto($nombre, $cantidad, $precio);
+        $idNuevo = $this->model->crearUnProducto($nombre, $cantidad, $precio);
         
         
         http_response_code(201);
         echo json_encode([
-                "mensaje"=>"Producto creado correctamente",
-                "nombre"=>$nombre,
-                "cantidad"=>$cantidad,
-                "precio"=>$precio
-            ]);
-    }
+        "mensaje"=>"Producto creado correctamente",
+        "id"=>$idNuevo,
+        "nombre"=>$nombre,
+        "cantidad"=>$cantidad,
+        "precio"=>$precio]);
+        }
+         
     //delete api/productos/{id}
     public function eliminar(int $id): void{
 

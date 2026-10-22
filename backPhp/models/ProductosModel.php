@@ -15,14 +15,15 @@ class ProductosModel{
 
         }
         //creo un producto
-    public function crearUnProducto(string $nombre, int $cantidad, int $precio): bool {
+    public function crearUnProducto(string $nombre, int $cantidad, int $precio):int{
         $sql = "INSERT INTO productos (nombre, cantidadVendidos, precio) VALUES (:nombre, :cantidadVendidos, :precio)";
         $stmt = $this->db->prepare($sql);
-        return $stmt->execute([
+        $stmt->execute([
             ':nombre'=>$nombre,
             ':cantidadVendidos'=>$cantidad,
             ':precio'=>$precio,
         ]);
+        return (int) $this->db->lastInsertId();
     }
         //eliminar un producto
     public function eliminarProducto(int $id): bool {

@@ -75,9 +75,9 @@ export const store = defineStore('producto',()=>{
     async function crear() {
         cargando.value='Cargando'
         const nuevoProducto = {
-        nombre: 'bicicleta',
-        cantidad: 100,
-        precio: 150000
+        nombre: 'gatus',
+        cantidad: 57,
+        precio: 1500000
         };
         
         try{
@@ -90,6 +90,7 @@ export const store = defineStore('producto',()=>{
             });
             const resultado = await respuesta.json();
             console.log(resultado);
+            console.log(resultado.id);
             produc.value.push({
                 'id':resultado.id,
                 'name':nuevoProducto.nombre,
@@ -107,7 +108,7 @@ export const store = defineStore('producto',()=>{
     }
     async function eliminar() {
         cargando.value='Cargando'
-        const id = ref(11)
+        const id = ref(19)
 
         
         try{
@@ -161,22 +162,6 @@ export const store = defineStore('producto',()=>{
             cargando.value='Exito'
         }
     }
-    /*
-    async function eliminar(id:number) {
-        const estadoAnterior = produc.value
-        produc.value = produc.value.filter(c=>c.id!==id)
-        try{
-            const response = await fetch(`http://localhost:8000/api/productos/${id}`,{method: 'DELETE'})
-             if (!response.ok) {
-                throw new Error(`Error HTTP: ${response.status}`)
-                }
-        }catch(e){
-            await new Promise(resolve => setTimeout(resolve, 2000))
-            produc.value = estadoAnterior
-            toast.error('No se pudo eliminar el producto')
-            console.log("problema al enviar la API",e)
-        }
-    }*/
     
 
 

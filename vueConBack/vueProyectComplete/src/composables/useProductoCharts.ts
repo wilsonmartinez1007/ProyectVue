@@ -33,10 +33,7 @@ const actualizarPorcentaje = (params) => {
 }
     
 const option = computed(()=>({
-  title: {
-    text:"Ingresos por producto",
-    left:"center"
-  },
+  
   tooltip:{
     trigger:"axis",
     axisPointer: {type: 'cross',
@@ -56,7 +53,8 @@ const option = computed(()=>({
   },
   yAxis:{
     type: 'value',
-    name: 'Dinero optenido por producto'
+    name: 'Dinero optenido por producto',
+    color: 'white'
   },
   series:[
     { name:'ventas',
@@ -82,10 +80,7 @@ const option = computed(()=>({
 
 
 const clasificacion = computed(()=>({
-    title: {
-        text:"Clasificacion de Productos por rotacion",
-        left:"center"
-         },
+    
     tooltip:{
         trigger:"item",
         formatter:(params)=>{
@@ -151,10 +146,7 @@ const clasificacion = computed(()=>({
 })
 )
 const ventasandPromedio = computed(()=>({
-  title: {
-    text:"Cantidad de ventas por producto",
-    left:"center"
-  },
+  
   grid:{
     left : '10%',
     right : '20%',
