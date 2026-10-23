@@ -33,7 +33,7 @@ const {
       <h3 class="center-title">
         {{ vistaActiva === 'graficos' ? 'Analítica' : 'Inventario' }}
       </h3>
-      <p class="center-subtitle">Módulo activo</p>
+     
     </div>
 
     <!-- Botones Periféricos -->
@@ -74,6 +74,7 @@ const {
   box-shadow: 0px 0px 20px rgba(255, 99, 71, 0.25);
   z-index: 2;
   user-select: none;
+  
 }
 
 .center-badge {
@@ -82,16 +83,12 @@ const {
 
 .center-title {
   margin: 0;
-  font-size: 1.1rem;
-  color: #ffffff;
+  font-size: 1.5rem;
+  color: #ffffffdc;
   font-weight: bold;
 }
 
-.center-subtitle {
-  margin: 0;
-  font-size: 0.75rem;
-  color: #888;
-}
+
 
 :deep(.pos-0) {
   left: 0;

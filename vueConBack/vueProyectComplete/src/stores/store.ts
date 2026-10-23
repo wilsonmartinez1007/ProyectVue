@@ -1,7 +1,7 @@
 import {defineStore} from 'pinia'
 import {ref, computed} from 'vue'
 //import { toast } from 'vue-sonner'
-import { getProductosAPI } from '@/services/serviceProduct'
+import { getProductosAPI,posProductosApi,deleteProductosApi,putProductosApi } from '@/services/serviceProduct'
 import type {Producto, Estado} from '@/types/interfaces'
 
 
@@ -72,30 +72,22 @@ export const store = defineStore('producto',()=>{
             cargando.value='Exito'
         }
     }
-    async function crear() {
+    async function crear(nuevoProducto) {
         cargando.value='Cargando'
-        const nuevoProducto = {
-        nombre: 'gatus',
-        cantidad: 57,
-        precio: 1500000
-        };
+        
         
         try{
-           const respuesta = await fetch('http://localhost:8000/api/productos/create', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(nuevoProducto)
-            });
-            const resultado = await respuesta.json();
-            console.log(resultado);
-            console.log(resultado.id);
+            console.log(nuevoProducto)
+           const peticionCrear = await posProductosApi(nuevoProducto);
+           
+            
+            console.log(peticionCrear);
+            console.log(peticionCrear.id);
             produc.value.push({
-                'id':resultado.id,
-                'name':nuevoProducto.nombre,
+                'id':peticionCrear.id,
+                'name':nuevoProducto.name,
                 "cantidad":nuevoProducto.cantidad,
-                "price":nuevoProducto.precio,
+                "price":nuevoProducto.price,
             })                      
             
         }catch(e){
@@ -106,16 +98,16 @@ export const store = defineStore('producto',()=>{
             cargando.value='Exito'
         }
     }
-    async function eliminar() {
+    async function eliminar(id:number) {
         cargando.value='Cargando'
-        const id = ref(19)
+       
 
         
         try{
-            const respuesta = await fetch(`http://localhost:8000/api/productos/${id.value}`,{method: 'DELETE'});
-            const resultado = await respuesta.json();
-            console.log(resultado);
-            const indice = produc.value.findIndex(c=>c.id===id.value)
+            const peticion = await deleteProductosApi(id);
+            
+            console.log(peticion);
+            const indice = produc.value.findIndex(c=>c.id===id)
             if (indice !== -1) {
             produc.value.splice(indice, 1); 
             }                  
@@ -128,27 +120,16 @@ export const store = defineStore('producto',()=>{
             cargando.value='Exito'
         }
     }
-    async function actualizar() {
+    async function actualizar(productoAc) {
         cargando.value='Cargando'
-        const id = ref(1)
-        const productoAc = {
-        nombre: 'carro',
-        cantidad: 200,
-        precio: 190000
-        };
+        
 
         
         try{
-            const respuesta = await fetch(`http://localhost:8000/api/productos/actualizar/${id.value}`,{
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(productoAc)
-            });
-            const resultado = await respuesta.json();
-            console.log(resultado);
-            const usuarioEditar = produc.value.find(c=>c.id===id.value)
+            const peticion = await putProductosApi(productoAc);
+            
+            console.log(peticion);
+            const usuarioEditar = produc.value.find(c=>c.id===productoAc.id)
             if(usuarioEditar){
                 Object.assign(usuarioEditar,productoAc)
             }

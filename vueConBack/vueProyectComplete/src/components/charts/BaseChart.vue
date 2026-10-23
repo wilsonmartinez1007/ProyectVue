@@ -36,7 +36,8 @@
     .chart {
         height: 100%; 
         width: 100%; 
-        min-height: 250px;
+        min-height: 350px;
+        max-height: 500px;
     }
 
 </style>

@@ -6,6 +6,8 @@
         columns :Array,
         filterKey: String
     })
+    // DECLARAR LOS EMITS
+    const emit = defineEmits(['seleccionar'])
     const sortKey = ref('')
     const sortOrders = ref(
         props.columns.reduce((o,key) =>((o[key]=1),o),{})
@@ -46,12 +48,12 @@
     <thead>
         <tr>
             <th v-for="key in columns"
-            @click="sortBy(key)"
-            :class="{active: sortKey==key}">
-            {{ capitalize(key) }}
-            <span class="arrow" :class="sortOrders[key]>0?'asc':'dsc'">
+                @click="sortBy(key)"
+                :class="{active: sortKey==key}">
+                {{ capitalize(key) }}
+                <span class="arrow" :class="sortOrders[key]>0?'asc':'dsc'">
 
-            </span>
+                </span>
 
             </th>
         </tr>
@@ -59,14 +61,17 @@
     </thead>
     <tbody>
         
-        <tr v-for="entry in filterdData">
-            <td v-for="key in columns">
-               
-                {{ entry[key] }}
-                
-            </td>
-            
-        </tr>
+        <!-- CAMBIO AQUÍ: Agregamos @click y clase a la fila -->
+      <tr
+        v-for="(entry, index) in filterdData"
+        :key="entry.id || index"
+        class="fila-click"
+        @click="emit('seleccionar', entry)"
+      >
+        <td v-for="key in columns" :key="key">
+          {{ entry[key] }}
+        </td>
+      </tr>
    
     </tbody>
    </table>

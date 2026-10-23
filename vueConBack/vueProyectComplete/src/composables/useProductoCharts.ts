@@ -47,14 +47,16 @@ const option = computed(()=>({
     type:'category',
     axisLabel:{
       interval:0,
-      rotate:70
+      rotate:70,
+      color: 'white',
     }
   
   },
   yAxis:{
     type: 'value',
-    name: 'Dinero optenido por producto',
-    color: 'white'
+    name: 'Dinero',
+    nameTextStyle:{color: 'white',fontSize:19,},
+    axisLabel:{color: 'white',}
   },
   series:[
     { name:'ventas',
@@ -64,7 +66,17 @@ const option = computed(()=>({
         y: "totalVentas"
       },
       itemStyle:{
-        color: '#e459dde5',
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [
+            { offset: 0, color: '#ec0cdd' },
+            { offset: 1, color: '#d5acd3' }  
+          ]
+        }
       },
       emphasis:{
         focus: 'self'
@@ -94,6 +106,7 @@ const clasificacion = computed(()=>({
     legend: {
      
         left: 10,
+        textStyle:{color: 'white',fontSize:19,},
         orient:'vertical',
         top:'center',
             },
@@ -108,7 +121,7 @@ const clasificacion = computed(()=>({
                 textVerticalAlign: 'middle',
                 fontSize:24,
                 fontWeight: 'bold',
-                fill:'#333'
+                fill:'#fff9f9'
             }
         }
     ],
@@ -127,7 +140,8 @@ const clasificacion = computed(()=>({
     //mostrar etiquetas encima de las porciones
     label: {
           show: true,
-          
+          fill:'#fff9f9',
+          textStyle:{color: 'white',fontSize:19,},
         },
       
     itemStyle:{
@@ -138,7 +152,7 @@ const clasificacion = computed(()=>({
         scale :true,
         focus: 'self'
     },
-    color:['#3f98b3','black','gray']
+    color:['#3f98b3','black','#cd60c6f4']
     }
   ]
 
@@ -167,13 +181,22 @@ const ventasandPromedio = computed(()=>({
     type:'category',
     axisLabel: {
       interval: 0,
-      rotate: 70
+      rotate: 70,
+      color: 'white',
+      
     }
      },
   yAxis:{
     type: 'value',
     name: 'Ventas por producto',
+    nameTextStyle:{ color: 'white',
+                    fontSize:19,
+
+                    },
+    color: 'white',
     position: 'left',
+    axisLabel:{color: 'white',}
+    
 
     
   },
@@ -189,18 +212,29 @@ const ventasandPromedio = computed(()=>({
         y: "cantidad"
       },
       itemStyle:{
-        color: '#3f98b3'
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [
+            { offset: 0, color: '#00c3ff' },
+            { offset: 1, color: '#a4b6bb' }  
+          ]
+        }
       },
       markLine: {
         silent: true,
         symbol: ['none','none'],
         label:{
           show: true,
-          position: 'insideEndTop',
-          formatter: `Promedio general (${(promedio.value)})`
+          position: 'end',
+          formatter: `Promedio general (${(promedio.value)})`,
+          textStyle:{ color: '#fffdff', fontSize:11.3,fontWeight: 'bold',},
         },
         lineStyle:{
-          color: '#030303',
+          color: '#d42542',
           type: 'dashed',
           width: 2
         },

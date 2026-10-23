@@ -4,6 +4,8 @@ import {store} from './stores/store.ts'
 
 //imagen
 import fondo from './assets/fondo.png'
+import satlock from './assets/titulo/titulo.png'
+
 import { storeToRefs } from 'pinia'
 
 //mostrar productos en tabla
@@ -50,12 +52,11 @@ function manejarCambioVista(nuevaVista) {
         <div class="borde"  >
           <img :src="fondo" alt="Logo del proyecto" class="img">
           <div class="centrar">
-          <h1 class="titulo">SATLOCK</h1>
-            <p class="texto">Holaa, aqui podras ver los graficos con la información de tus ventas  </p>
-            <button class="botonC" @click="seccionActual='dasboard'">Mostrar graficos con charts</button>
-            <button @click="productos.crear()">ver si creo</button>
-            <button @click="productos.eliminar()">eliminar</button>
-            <button @click="productos.actualizar()">actualizar</button>
+            
+            <h1 class="titulo">SATLOCK</h1>
+              <p class="texto">Holaa, aqui podras ver los graficos con la información de tus ventas  </p>
+              <button class="botonC" @click="seccionActual='dasboard'">Mostrar graficos con charts</button>
+              
           
           
           </div>
@@ -65,26 +66,24 @@ function manejarCambioVista(nuevaVista) {
     <section v-if="seccionActual==='dasboard'" class="dasboardSection">
 
       <header class="bloqueSalir">
-        <button class="botonSalir" @click="seccionActual='inicio'">salir</button>
-        <h1 class="titulo">SATLOCK</h1>
-        
+        <button class="botonSalir" @click="seccionActual='inicio'">salir</button>   
       </header>
 
       <div class="dashboard-layout">
         <aside class="columna-radial">
+          <div class="tituloS"><img :src="satlock" alt="titulo prin"></div>
+          
             <RadialMenu @cambiarVista="manejarCambioVista"  />
         </aside>
         
         <main  class="columna-contenido">
           <div class="divisionPantalla" v-if="subVistaActiva === 'graficos' && cargando=='Exito'">
-            
-            <div  class="divisionPantallaFila">
               
               <div class="chart-container">
               <h2>Cantidad de ventas por Producto</h2>
               <BaseChart :option="ventasandPromedio"  />
               </div>
-            </div>
+            
           
         
           <div class="divisionPantallaFila">
@@ -94,7 +93,7 @@ function manejarCambioVista(nuevaVista) {
             <div class="chart-container">
              <h2>Distribución por rotacion</h2>
             <BaseChart :option="clasificacion "  @legendselectchanged="actualizarPorcentaje"/>
-          </div>
+              </div>
           <div class="chart-container"> 
             <h2>Ingresos por producto</h2>
             <BaseChart :option="option"  />
@@ -104,19 +103,16 @@ function manejarCambioVista(nuevaVista) {
           
         </div>
         <div v-else-if="subVistaActiva === 'inventario'">
-          <div class="divisionPantalla">
-              <div class="placeholder-card">
+          
+            <div class="placeholder-card">
                 
-              <h2>Inventario</h2>
+              <h2>INVENTARIO</h2>
               <Productos></Productos>
               
-                </div>
-              <div class="cardForm">
-                <h2>Crea y actualiza tus productos</h2>
-                <ProductoEditar></ProductoEditar>
-              </div>
+                
+              
           
-          </div>
+                </div>
           
 
         </div>
@@ -145,6 +141,16 @@ function manejarCambioVista(nuevaVista) {
 </template>
 
 <style scoped>
+  .tituloS{
+    width: 280px;
+  }
+  .tituloS img{
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+  }
   .dashboard-layout {
     display: flex;
     gap: 2rem;
@@ -162,11 +168,6 @@ function manejarCambioVista(nuevaVista) {
   flex: 1; /* El contenido toma el resto del espacio disponible */
   }
 
-  @media (max-width: 900px) {
-  .dashboard-layout {
-    flex-direction: column;
-    align-items: center;
-  }}
   
   .columna-radial {
     flex: initial;
@@ -219,6 +220,7 @@ function manejarCambioVista(nuevaVista) {
     display: block;
     border-radius: 20px;
   }
+  
   .botonSalir{
     padding: 0.5rem 1.2rem;
     width: 120px;
@@ -226,15 +228,15 @@ function manejarCambioVista(nuevaVista) {
     border:1px dashed #ff6347;
     color: #ccc;
     border-radius: 10px;
-    margin-left: 90%;
-    font-size: 1.6rem;
+    margin-left: 94.2%;
+    font-size: 1.5rem;
   }
   .botonSalir:hover{
     border-color: #ff6347;
     color: #ff6347;
   }
   .texto{
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     color: #ccc;
     text-align:start;
@@ -244,23 +246,30 @@ function manejarCambioVista(nuevaVista) {
   .chart-container {
     background: #1e1e1e;
     border-radius: 12px;
-    width: 90%;
+    width: 96%;
     border: 1px solid #333;
+    max-height: 700px;
   }
   .chart-container h2 {
-    margin-top: 1 rem;
+    margin-top:  4rem;
     margin-left: 2rem;
     font-size: 2rem;
-    color: #e8e3e2;
+    font-family:Arial, Helvetica, sans-serif;
+    color: #ff6347b3;
   }
 
  
-  
-  
-  .titulo{
-    font-size: 2.9rem;
+  .centrar h1{
+    font-size: 3.4rem;
     font-family:Arial, Helvetica, sans-serif;
     color:#FF6347;
+    margin-left: 10px;
+  }
+  .columna-radial h1{
+    font-size: 3.4rem;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#FF6347;
+    margin-left: 10px;
     
   }
   .botonC{
@@ -315,18 +324,19 @@ function manejarCambioVista(nuevaVista) {
 
   }
   .placeholder-card {
-    margin-left: 10%;
     background-color: #1e1e1e;
     border: 1px dashed #ff6347;
-    padding: 2.5rem;
+    padding: 1.5rem;
     border-radius: 12px;
     text-align: center;
     color: #fff;
-    min-width: 700px;
+    min-width: 1000px;
   }
   .placeholder-card h2 {
-  color: #ff6347;
-  margin-bottom: 0.5rem;
+    color: #fffdfdc2;
+    margin-bottom: 0.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3rem;
   }
   .cardForm {
     margin-left: 20%;

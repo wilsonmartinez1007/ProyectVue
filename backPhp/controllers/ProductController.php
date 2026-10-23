@@ -20,9 +20,9 @@ class ProductController{
         $json = file_get_contents('php://input');
         $datos = json_decode($json,true);
 
-        $nombre =$datos['nombre']?? '';
+        $nombre =$datos['name']?? '';
         $cantidad = (int) $datos['cantidad']?? 0;
-        $precio =$datos['precio']?? 0;
+        $precio =$datos['price']?? 0;
 
         //traigo los producto
         $productos = $this->model->obtenerProductos();
@@ -85,9 +85,9 @@ class ProductController{
         $json = file_get_contents('php://input');
         $datos = json_decode($json,true);
 
-        $nombre =$datos['nombre']?? '';
+        $nombre =$datos['name']?? '';
         $cantidad = (int) $datos['cantidad']?? 0;
-        $precio =$datos['precio']?? 0;
+        $precio =$datos['price']?? 0;
 
         $existe = false;
 
