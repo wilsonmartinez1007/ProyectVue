@@ -1,37 +1,36 @@
 
 <script setup>
-    import { number } from 'echarts';
-import { ref, watch } from 'vue';
-     
+
+    import {watch, computed } from 'vue';
+    import { storeToRefs } from 'pinia'
+    import { store } from '@/stores/store.ts'
+
+    const productos = store()
+    const {borradorFormulario:form} = storeToRefs(productos) 
+   
     const props = defineProps({
         productoSeleccionado: {
             type: Object
         }
     })
-    const emit = defineEmits(['Guardar', 'actualizar', 'eliminar','limpiar'])
+    const emit = defineEmits(['guardar', 'actualizar', 'eliminar','limpiar'])
+    const esEdicion = computed(() => Boolean(form.value.id))
 
-    const form = ref({
-        id: 0,
-        name: '',
-        cantidad:0,
-        price:0
-    })
-    const esEdicion = ref(false)
 
     watch(
         ()=> props.productoSeleccionado,
         (nuevoVal)=>{
             if(nuevoVal){
-                form.value= {
-                    ...nuevoVal
-
+                form.value = {
+                    id: nuevoVal.id ?? '',
+                    name: nuevoVal.name ?? '',
+                    cantidad: nuevoVal.cantidad ?? 0,
+                    price: nuevoVal.price ?? 0
                 }
                 esEdicion.value=true
             }else{
                 limpiarFormulario()
-            }
-        },{immediate:true}
-    )
+            } }, )
     function limpiarFormulario(){
         form.value ={id:'',name:'',cantidad:0,price:0}
         esEdicion.value = false
@@ -39,29 +38,26 @@ import { ref, watch } from 'vue';
     }
     function guardar(){
         if(!form.value.name) return alert('Se deben llenar todos los campos')
-        emit('Guardar',{...form.value})
+        emit('guardar',{...form.value})
         limpiarFormulario()
     }
     function actualizar(){
-        emit('Actualizar',{...form.value})
+        emit('actualizar',{...form.value})
         limpiarFormulario()
     }
     function eliminar(){
-        if (confirm(`Seguro que quieres eliminar el producto #${form.value.name}?`)){
-            emit('Eliminar', form.value.id)
+        if (confirm(`Seguro que quieres eliminar el producto ${form.value.name}?`)){
+            emit('eliminar', form.value.id)
             limpiarFormulario()
-        }
-
-    }
-    
+        } }
 </script>
 <template>
     <div class="form-container">
-        <div class="form-haeader">
+        <div>
+             
             <h3>{{ esEdicion? 'Editar Producto':'Crear un producto' }}</h3>
             <button v-if="esEdicion" class="btn-nuevo" @click="limpiarFormulario">
                 Crear Producto
-
             </button>
         </div>
         <form @submit.prevent="esEdicion? actualizar():guardar()">
@@ -103,6 +99,7 @@ import { ref, watch } from 'vue';
     </div>
 </template>
 <style scoped>
+    
     .form-container{
         background-color: transparent;
         border: none;
@@ -110,12 +107,7 @@ import { ref, watch } from 'vue';
         padding: 1.5rem;
         color: #fff        
         }
-    .form-header{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1.2rem;
-    }
+    
     .form-container h3{
         font-size: 1.3rem;
     }
@@ -170,8 +162,7 @@ import { ref, watch } from 'vue';
     button:hover{
         opacity: 0.55;
     }
-    .btn-primary{background-color: #ff6347;color: #fff;
-    }
+    .btn-primary{background-color: #ff6347;color: #fff;}
     .btn-warning{ background-color: #fafafa;color: #000;}
     .btn-danger {background-color: #d9534f; color: #000;}
     .btn-nuevo{background-color: #333; color:#ccc; font-size: 1.3rem;padding: 0.3rem 0.6rem;margin-bottom: 1rem;}

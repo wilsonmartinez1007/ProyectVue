@@ -1,19 +1,13 @@
 <script setup>
-    import DemoGrid from './Grid.vue'
-    import { ref } from 'vue'
-
+    import DemoGrid from './TablaProducto.vue'
     import {store} from '@/stores/store.ts'
     import { storeToRefs } from 'pinia'
-
     //formulario
     import ProductoEditar from './ProductoEditar.vue'
 
     const productos = store()
-    const {produc} = storeToRefs(productos)
-    const searchQuery = ref('')
+    const {produc,searchQuery,productoSeleccionado} = storeToRefs(productos)
     const gridColumns = ['id','name','cantidad', 'price']
-
-    const productoSeleccionado =ref(null)
 
     function seleccionarProducto(producto){
         productoSeleccionado.value = producto
@@ -67,16 +61,12 @@
         margin-bottom: 1rem;
         max-width: 316px;
     }
-    .buscar{
-        font-size: 1.5rem;
-        
-    }
     .modulo-productos{
         display: grid;
-        grid-template-columns: 1fr 340px;
-        gap:1.5rem;
+        grid-template-columns: 1fr 440px;
+        gap:0.5rem;
         align-items: start;
-        width: 100%;
+        width: 90%;
     }
     .cbuscar {
         display: flex;
@@ -107,7 +97,7 @@
             width: 100%;
             position:relative;
             margin-top: 3.7rem;
-            margin-left: -220px; /* Mantiene el formulario visible mientras te desplazas en la tabla */
+            
             }
 
     

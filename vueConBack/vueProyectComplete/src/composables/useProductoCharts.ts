@@ -108,13 +108,12 @@ const clasificacion = computed(()=>({
         left: 10,
         textStyle:{color: 'white',fontSize:19,},
         orient:'vertical',
-        top:'center',
             },
     graphic:[
         {
             type:'text',
-            left:'50.7%',
-            top:'45%',
+            left:'56.7%',
+            top:'32%',
             style:{
                 text:`${porcentajeVisible.value}%`,
                 textAlign:'center',
@@ -131,7 +130,7 @@ const clasificacion = computed(()=>({
         name:'ventas',
         type: 'pie',
         radius:['25%','45%'],
-        center: ['55%', '47%'],
+        center: ['61%', '33%'],
 
         encode:{
             itemName: "name",

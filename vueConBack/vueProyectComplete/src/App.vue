@@ -1,42 +1,34 @@
 <script setup>
 import { onMounted,ref} from 'vue'
 import {store} from './stores/store.ts'
-
+import { storeToRefs } from 'pinia'
+import { pluginStore } from './stores/pluginStore.ts'
+import { useProductosCharts } from './composables/useProductoCharts.ts'
+import BaseChart from './components/charts/BaseChart.vue'
+import { Toaster } from 'vue-sonner'
 //imagen
 import fondo from './assets/fondo.png'
 import satlock from './assets/titulo/titulo.png'
 
-import { storeToRefs } from 'pinia'
 
-//mostrar productos en tabla
+//mostrar(tabla)/crear/editar/eliminar productos 
 import Productos from './components/productos/Productos.vue'
-//editar/crear/eliminar productos
-import ProductoEditar from './components/productos/ProductoEditar.vue'
+
 //radial
 import RadialMenu from '@/components/radial/RadialMenu.vue'
 
-
-const seccionActual = ref('inicio')
-const subVistaActiva = ref('graficos') // 'graficos' | 'inventario'
-
+const uiStore = pluginStore()
+const {seccionActual,subVistaActiva} = storeToRefs(uiStore)
 
 const productos = store()
 const {produc, rotacionC, ventas, promedio, cargando} = storeToRefs(productos)
-
-import { useProductosCharts } from './composables/useProductoCharts.ts'
-import BaseChart from './components/charts/BaseChart.vue'
-//compossable
 const {option, clasificacion,ventasandPromedio,actualizarPorcentaje} = useProductosCharts(produc, rotacionC, ventas, promedio) 
-
-
-
 
 onMounted(()=>{
   productos.cargar()
   
 })
 
-// Cambiar la sub-vista desde el Menú Radial
 function manejarCambioVista(nuevaVista) {
   subVistaActiva.value = nuevaVista
 }
@@ -45,6 +37,7 @@ function manejarCambioVista(nuevaVista) {
 </script>
 
 <template>
+  <Toaster/>
   <div class="contenedor">
       
       
@@ -73,13 +66,13 @@ function manejarCambioVista(nuevaVista) {
         <aside class="columna-radial">
           <div class="tituloS"><img :src="satlock" alt="titulo prin"></div>
           
-            <RadialMenu @cambiarVista="manejarCambioVista"  />
+            <RadialMenu :sub-vista="subVistaActiva" @cambiarVista="manejarCambioVista"  />
         </aside>
         
         <main  class="columna-contenido">
           <div class="divisionPantalla" v-if="subVistaActiva === 'graficos' && cargando=='Exito'">
               
-              <div class="chart-container">
+              <div class="chart-containerVentas">
               <h2>Cantidad de ventas por Producto</h2>
               <BaseChart :option="ventasandPromedio"  />
               </div>
@@ -228,7 +221,7 @@ function manejarCambioVista(nuevaVista) {
     border:1px dashed #ff6347;
     color: #ccc;
     border-radius: 10px;
-    margin-left: 94.2%;
+    margin-left: 92.7%;
     font-size: 1.5rem;
   }
   .botonSalir:hover{
@@ -248,7 +241,7 @@ function manejarCambioVista(nuevaVista) {
     border-radius: 12px;
     width: 96%;
     border: 1px solid #333;
-    max-height: 700px;
+    min-height: 640px;
   }
   .chart-container h2 {
     margin-top:  4rem;
@@ -257,7 +250,20 @@ function manejarCambioVista(nuevaVista) {
     font-family:Arial, Helvetica, sans-serif;
     color: #ff6347b3;
   }
-
+  .chart-containerVentas {
+    background: #1e1e1e;
+    border-radius: 12px;
+    width: 96%;
+    border: 1px solid #333;
+    max-height: 638px;
+  }
+  .chart-containerVentas h2 {
+    margin-top:  4rem;
+    margin-left: 2rem;
+    font-size: 2rem;
+    font-family:Arial, Helvetica, sans-serif;
+    color: #ff6347b3;
+  }
  
   .centrar h1{
     font-size: 3.4rem;
@@ -331,6 +337,7 @@ function manejarCambioVista(nuevaVista) {
     text-align: center;
     color: #fff;
     min-width: 1000px;
+    max-width: 1390px;
   }
   .placeholder-card h2 {
     color: #fffdfdc2;
@@ -346,11 +353,10 @@ function manejarCambioVista(nuevaVista) {
     border-radius: 12px;
     text-align: center;
     color: #fff;
-    min-width: 00px;
   }
   .cardForm h2 {
-  color: #ff6347;
-  margin-bottom: 0.5rem;
+    color: #ff6347;
+    margin-bottom: 0.5rem;
   }
 
 

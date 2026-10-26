@@ -1,12 +1,23 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import RadialItem from './RadialItem.vue'
 import PreviewCard from './PreviewCard.vue'
 import { OPCIONES_RADIALES } from '@/types/interfaces'
 import { useRadialMenu } from '@/composables/useRadialMenu'
-
+const props = defineProps({
+  subVista: {
+    type: String,
+    default: 'inventario'
+  }
+})
 const emit = defineEmits(['cambiarVista'])
-const vistaActiva = ref('graficos')
+const vistaActiva = ref(props.subVista)
+watch(
+  () => props.subVista,
+  (nueva) => {
+    vistaActiva.value = nueva
+  }
+)
 
 const {
   opcionPresionada,

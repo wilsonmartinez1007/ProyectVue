@@ -1,12 +1,13 @@
 <script setup>
 
     import {ref, computed} from 'vue'
+    
     const props = defineProps({
-        data: Array,
-        columns :Array,
-        filterKey: String
+        data: {type: Array, default:()=>[]},
+        columns :{type: Array, default:()=>[]},
+        filterKey: {type: String, default: ''}
     })
-    // DECLARAR LOS EMITS
+    
     const emit = defineEmits(['seleccionar'])
     const sortKey = ref('')
     const sortOrders = ref(
@@ -61,7 +62,7 @@
     </thead>
     <tbody>
         
-        <!-- CAMBIO AQUÍ: Agregamos @click y clase a la fila -->
+      
       <tr
         v-for="(entry, index) in filterdData"
         :key="entry.id || index"
