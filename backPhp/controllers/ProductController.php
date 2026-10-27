@@ -23,6 +23,8 @@ class ProductController{
         $nombre =$datos['name']?? '';
         $cantidad = (int) $datos['cantidad']?? 0;
         $precio =$datos['price']?? 0;
+        $fecha = $datos['fecha']?? '';
+        $ciudad = $datos['ciudad']?? '';
 
         //traigo los producto
         $productos = $this->model->obtenerProductos();
@@ -40,7 +42,7 @@ class ProductController{
             }
         
         
-        $idNuevo = $this->model->crearUnProducto($nombre, $cantidad, $precio);
+        $idNuevo = $this->model->crearUnProducto($nombre, $cantidad, $precio, $fecha, $ciudad);
         
         
         http_response_code(201);
@@ -49,7 +51,10 @@ class ProductController{
         "id"=>$idNuevo,
         "nombre"=>$nombre,
         "cantidad"=>$cantidad,
-        "precio"=>$precio]);
+        "precio"=>$precio,
+        "fecha"=>$fecha,
+        "ciudad"=>$ciudad
+        ]);
         }
          
     //delete api/productos/{id}
@@ -88,6 +93,8 @@ class ProductController{
         $nombre =$datos['name']?? '';
         $cantidad = (int) $datos['cantidad']?? 0;
         $precio =$datos['price']?? 0;
+        $fecha = $datos['fecha']?? '';
+        $ciudad = $datos['ciudad']?? '';
 
         $existe = false;
 
@@ -102,14 +109,16 @@ class ProductController{
             echo json_encode(["Error"=> "Producto no encontrado"]);
             return;
         }
-        $this->model->actualizarProducto($id,$nombre,$cantidad,$precio);
+        $this->model->actualizarProducto($id,$nombre,$cantidad,$precio,$fecha,$ciudad);
         http_response_code(200);
         echo json_encode([
                 "mensaje"=>"Producto actualizado correctamente",
                 "id"=> $id,
                 "nombre"=>$nombre,
                 "cantidad"=>$cantidad,
-                "precio"=>$precio
+                "precio"=>$precio,
+                "fecha"=>$fecha,
+                "ciudad"=>$ciudad
             ]);
     }
     

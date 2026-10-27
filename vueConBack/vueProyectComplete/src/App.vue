@@ -330,8 +330,6 @@ function manejarCambioVista(nuevaVista) {
 
   }
   .placeholder-card {
-    background-color: #1e1e1e;
-    border: 1px dashed #ff6347;
     padding: 1.5rem;
     border-radius: 12px;
     text-align: center;
@@ -344,6 +342,7 @@ function manejarCambioVista(nuevaVista) {
     margin-bottom: 0.5rem;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 3rem;
+    margin-right: 600px;
   }
   .cardForm {
     margin-left: 20%;

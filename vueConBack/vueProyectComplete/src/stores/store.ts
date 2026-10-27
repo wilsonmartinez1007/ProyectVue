@@ -30,12 +30,12 @@ export const store = defineStore('producto',()=>{
             }))
         }else return[]
     })
-
+   
     const ventas = computed(()=>{
         return produc.value.map((p:Producto)=>({
             id: p.id,
             name: p.name,
-            totalVentas: p.cantidad*p.price,
+            totalVentas:p.cantidad*p.price,
         }))})
 
     const promedio = computed(()=>{
@@ -53,6 +53,8 @@ export const store = defineStore('producto',()=>{
                 name: p.nombre,
                 cantidad: p.cantidadVendidos,
                 price: p.precio,
+                fecha: p.fecha,
+                ciudad:p.ciudad
             }))
             cargando.value = 'Exito'                      
             toast.message("Productos cargados con exito")
@@ -75,6 +77,8 @@ export const store = defineStore('producto',()=>{
                 'name':nuevoProducto.name,
                 "cantidad":nuevoProducto.cantidad,
                 "price":nuevoProducto.price,
+                "fecha":nuevoProducto.fecha,
+                "ciudad":nuevoProducto.ciudad
             })
             cargando.value = 'Exito' 
             toast.message("Producto creado con exito")                           

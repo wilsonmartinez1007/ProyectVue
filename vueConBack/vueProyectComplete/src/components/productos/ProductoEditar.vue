@@ -25,14 +25,16 @@
                     id: nuevoVal.id ?? '',
                     name: nuevoVal.name ?? '',
                     cantidad: nuevoVal.cantidad ?? 0,
-                    price: nuevoVal.price ?? 0
+                    price: nuevoVal.price ?? 0,
+                    fecha:nuevoVal.fecha ?? '',
+                    ciudad:nuevoVal.ciudad ?? ''
                 }
                 esEdicion.value=true
             }else{
                 limpiarFormulario()
             } }, )
     function limpiarFormulario(){
-        form.value ={id:'',name:'',cantidad:0,price:0}
+        form.value ={id:'',name:'',cantidad:0,price:0,fecha:'',ciudad:''}
         esEdicion.value = false
         emit('limpiar')
     }
@@ -78,6 +80,16 @@
              <div class="form-group">
                 <label >Precio</label>
                 <input v-model="form.price" type="number" placeholder="Ej. 1000" required>
+                
+            </div>
+            <div class="form-group">
+                <label >Fecha</label>
+                <input v-model="form.fecha" type="date" placeholder="Ej. 01/01/2026" required>
+                
+            </div>
+            <div class="form-group">
+                <label >Ciudad</label>
+                <input v-model="form.ciudad" type="text" placeholder="Ej. Cali ve" required>
                 
             </div>
             <div class="form-actions">

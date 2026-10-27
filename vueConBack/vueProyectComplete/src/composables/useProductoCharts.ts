@@ -35,11 +35,8 @@ const actualizarPorcentaje = (params) => {
 const option = computed(()=>({
   
   tooltip:{
-    trigger:"axis",
-    axisPointer: {type: 'cross',
-      
-    },
-  },
+        trigger:"item",
+        },
   dataset:{
     source: ventas.value??[]
   },

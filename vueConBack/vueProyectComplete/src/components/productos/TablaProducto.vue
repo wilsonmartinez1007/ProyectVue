@@ -85,6 +85,7 @@ table {
   border: none;
   border-radius: 30px;
   background-color: transparent;
+  width: 750px;
 }
 
 th {
@@ -103,7 +104,6 @@ td {
 
 th,
 td {
-  min-width: 120px;
   padding: 10px 20px;
 }
 

@@ -15,13 +15,15 @@ class ProductosModel{
 
         }
         //creo un producto
-    public function crearUnProducto(string $nombre, int $cantidad, int $precio):int{
-        $sql = "INSERT INTO productos (nombre, cantidadVendidos, precio) VALUES (:nombre, :cantidadVendidos, :precio)";
+    public function crearUnProducto(string $nombre, int $cantidad, int $precio, string $fecha, string $ciudad):int{
+        $sql = "INSERT INTO productos (nombre, cantidadVendidos, precio, fecha, ciudad) VALUES (:nombre, :cantidadVendidos, :precio, :fecha, :ciudad)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([
             ':nombre'=>$nombre,
             ':cantidadVendidos'=>$cantidad,
             ':precio'=>$precio,
+            ':fecha'=>$fecha,
+            ':ciudad'=>$ciudad
         ]);
         return (int) $this->db->lastInsertId();
     }
@@ -34,14 +36,16 @@ class ProductosModel{
         ]);
     }
     //actualizar un producto
-    public function actualizarProducto(int $id, string $nombre, int $cantidad, int $precio): bool {
-        $sql = "UPDATE productos SET nombre =:nombre, cantidadVendidos = :cantidad, precio = :precio WHERE id = :id";
+    public function actualizarProducto(int $id, string $nombre, int $cantidad, int $precio, string $fecha, string $ciudad): bool {
+        $sql = "UPDATE productos SET nombre =:nombre, cantidadVendidos = :cantidad, precio = :precio, fecha = :fecha, ciudad = :ciudad WHERE id = :id";
         $stmt = $this->db->prepare($sql);
         return $stmt -> execute([
             ':id'=> $id,
             'nombre'=>$nombre,
             ':cantidad'=> $cantidad,
-            ':precio'=> $precio
+            ':precio'=> $precio,
+            ':fecha'=>$fecha,
+            ':ciudad'=>$ciudad
         ]);
     }
     

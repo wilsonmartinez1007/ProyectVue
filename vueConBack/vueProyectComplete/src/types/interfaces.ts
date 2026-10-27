@@ -7,6 +7,8 @@ export interface Producto {
     "name": string,
     "cantidad":number,
     "price":number,
+    "fecha":string,
+    "ciudad":string
 }
 export type Estado = 'Cargando'|'Exito' |'Error'
 

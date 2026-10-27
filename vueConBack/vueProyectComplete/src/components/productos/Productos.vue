@@ -7,7 +7,7 @@
 
     const productos = store()
     const {produc,searchQuery,productoSeleccionado} = storeToRefs(productos)
-    const gridColumns = ['id','name','cantidad', 'price']
+    const gridColumns = ['id','name','cantidad', 'price','fecha','ciudad']
 
     function seleccionarProducto(producto){
         productoSeleccionado.value = producto
@@ -56,6 +56,9 @@
 </template>
 
 <style scoped>
+    .capaFormulario{
+        
+    }
     .busqueda{
         margin-top: 1.2rem;
         margin-bottom: 1rem;
@@ -66,7 +69,7 @@
         grid-template-columns: 1fr 440px;
         gap:0.5rem;
         align-items: start;
-        width: 90%;
+        width: 85%;
     }
     .cbuscar {
         display: flex;
@@ -94,10 +97,12 @@
             }
 
     .columna-formulario {
-            width: 100%;
+            width: 80%;
             position:relative;
-            margin-top: 3.7rem;
-            
+            margin-top: 3.1rem;
+            margin-left: 230px;
+            border-radius: 10px;
+            background-color:  #1e1e1e;
             }
 
     
