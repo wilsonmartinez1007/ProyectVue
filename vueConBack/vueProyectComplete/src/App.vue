@@ -10,7 +10,7 @@ import { Toaster } from 'vue-sonner'
 import fondo from './assets/fondo.png'
 import satlock from './assets/titulo/titulo.png'
 
-
+//
 //mostrar(tabla)/crear/editar/eliminar productos 
 import Productos from './components/productos/Productos.vue'
 
