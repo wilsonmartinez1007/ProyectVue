@@ -8,7 +8,6 @@ import BaseChart from './components/charts/BaseChart.vue'
 import { Toaster } from 'vue-sonner'
 //imagen
 import fondo from './assets/fondo.png'
-import satlock from './assets/titulo/titulo.png'
 
 //
 //mostrar(tabla)/crear/editar/eliminar productos 
@@ -41,7 +40,7 @@ function manejarCambioVista(nuevaVista) {
   <div class="contenedor">
       
       
-      <section v-if="seccionActual==='inicio'" class="section">
+      <section v-if="seccionActual==='inicio'" class="sectionInicio">
         <div class="borde"  >
           <img :src="fondo" alt="Logo del proyecto" class="img">
           <div class="centrar">
@@ -58,13 +57,19 @@ function manejarCambioVista(nuevaVista) {
   
     <section v-if="seccionActual==='dasboard'" class="dasboardSection">
 
-      <header class="bloqueSalir">
-        <button class="botonSalir" @click="seccionActual='inicio'">salir</button>   
+      <header class="header">
+        <div class="bloqueSalir">
+          <h2>The Platforms</h2>
+        <h4  :class="{'activa':cargando}"> <br>Estado: {{ cargando }}</h4>
+        <button @click="seccionActual='inicio'">salir</button> 
+        </div>
+        <h3>Inventario</h3>
+        <p>Puedes crear/editar/eliminar productos y vizualizar graficos <br> como el total de ventas por producto, el promedio <br>y la rotacion por ventas</p>
       </header>
 
       <div class="dashboard-layout">
         <aside class="columna-radial">
-          <div >The Platforms</div>
+          
           
             <RadialMenu :sub-vista="subVistaActiva" @cambiarVista="manejarCambioVista"  />
         </aside>
@@ -83,11 +88,11 @@ function manejarCambioVista(nuevaVista) {
 
             
             
-            <div class="chart-container">
+            <div class="chart-containerRotacion">
              <h2>Distribución por rotacion</h2>
             <BaseChart :option="clasificacion "  @legendselectchanged="actualizarPorcentaje"/>
               </div>
-          <div class="chart-container"> 
+          <div class="chart-containerIngreso"> 
             <h2>Ingresos por producto</h2>
             <BaseChart :option="option"  />
           </div>
@@ -99,7 +104,7 @@ function manejarCambioVista(nuevaVista) {
           
             <div class="placeholder-card">
                 
-              <h2>INVENTARIO</h2>
+              
               <Productos></Productos>
               
                 
@@ -134,10 +139,11 @@ function manejarCambioVista(nuevaVista) {
 </template>
 
 <style scoped>
-  .tituloS{
-    width: 280px;
+  .titulo{
+    width: 290px;
+    font-size: 2rem;
   }
-  .tituloS img{
+  .titulo img{
     width: 100%;
     height: 100px;
     object-fit: cover;
@@ -151,34 +157,37 @@ function manejarCambioVista(nuevaVista) {
     margin-top: 1rem;
   }
   .columna-radial {
-  flex: 0 0 300px; /* Ancho fijo para el Menú Radial */
-  position: sticky;
-  top: 2rem;
-  padding: 2rem;
-  }
+    flex: 0 0 300px; /* Ancho fijo para el Menú Radial */
+    background-color: #333;
+    border-radius: 10px;
+    border-left: 3px solid #ff6347;
+    margin-left: 30px;
+    margin-top: 19px;
+    position: sticky;
+    padding: 2rem;
+    }
 
-.columna-contenido {
-  flex: 1; /* El contenido toma el resto del espacio disponible */
-  }
+  .columna-contenido {
+    flex: 1; /* El contenido toma el resto del espacio disponible */
+    }
 
   
-  .columna-radial {
-    flex: initial;
-    position: static;
-  }
+  
   .contenedor{
-    min-height: 100vh;
+    margin-top: 0px!important;
+    min-height: 100vh!important;
     background-color:  rgba(3, 3, 3, 0.85);
     
   }
   
-  .section {
+  .sectionInicio {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     padding: 12rem 1rem;
     margin-left: 10rem;
   }
+  
   .borde{
     position: relative;
     border-radius: 20px;
@@ -213,20 +222,48 @@ function manejarCambioVista(nuevaVista) {
     display: block;
     border-radius: 20px;
   }
+  .header{
+    padding: 1.2rem;
+    color:#f5f2f1;
+    background-color: #333;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+     border-radius: 10px;
+  }
+  .bloqueSalir{
+    
+   
+    display: flex;
+
+  }
+  .bloqueSalir h2{
+    color: #ff6347;
+  }
+  .bloqueSalir h4{
+    margin-left: 70%;
+    margin-top: 10px;
+    width: 130px;
+    height:40px;
+    padding: 3px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  .activa{
+    color: #1DB954;
+  }
   
-  .botonSalir{
-    padding: 0.5rem 1.2rem;
-    width: 120px;
-    background-color:transparent;
-    border:1px dashed #ff6347;
+  .bloqueSalir button{
+    width: 100px;
+    height: 45px;
+    background-color:#b44936;
     color: #ccc;
     border-radius: 10px;
-    margin-left: 92.7%;
+    border: none;
+    margin-left: 16px;
+    margin-top: 15px;
     font-size: 1.5rem;
   }
-  .botonSalir:hover{
-    border-color: #ff6347;
-    color: #ff6347;
+  .bloqueSalir button:hover{
+    background-color: rgba(24, 23, 23, 0.658);
   }
   .texto{
     font-size: 1.5rem;
@@ -234,19 +271,33 @@ function manejarCambioVista(nuevaVista) {
     color: #ccc;
     text-align:start;
   }
-
-  
-  .chart-container {
+  .chart-containerRotacion {
     background: #1e1e1e;
     border-radius: 12px;
     width: 96%;
     border: 1px solid #333;
-    min-height: 640px;
+    max-height: 400px;
   }
-  .chart-container h2 {
-    margin-top:  4rem;
+  
+  .chart-containerIngreso {
+    background: #1e1e1e;
+    border-radius: 12px;
+    width: 96%;
+    border: 1px solid #333;
+    max-height: 400px;
+    margin-bottom: 60px;
+  }
+  .chart-containerRotacion h2 {
+    margin-top:  3rem;
     margin-left: 2rem;
-    font-size: 2rem;
+    font-size: 1rem;
+    font-family:Arial, Helvetica, sans-serif;
+    color: #ff6347b3;
+  }
+  .chart-containerIngreso h2 {
+    margin-top:  3rem;
+    margin-left: 2rem;
+    font-size: 1rem;
     font-family:Arial, Helvetica, sans-serif;
     color: #ff6347b3;
   }
@@ -255,18 +306,18 @@ function manejarCambioVista(nuevaVista) {
     border-radius: 12px;
     width: 96%;
     border: 1px solid #333;
-    max-height: 638px;
+    max-height: 400px;
   }
   .chart-containerVentas h2 {
     margin-top:  4rem;
     margin-left: 2rem;
-    font-size: 2rem;
+    font-size: 1rem;
     font-family:Arial, Helvetica, sans-serif;
     color: #ff6347b3;
   }
  
   .centrar h1{
-    font-size: 3.4rem;
+    font-size: 3rem;
     font-family:Arial, Helvetica, sans-serif;
     color:#FF6347;
     margin-left: 10px;
@@ -279,7 +330,6 @@ function manejarCambioVista(nuevaVista) {
     
   }
   .botonC{
-    margin-top: 1rem;
     height: 50px;
     width: 100%;
     border-radius: 11px;
@@ -287,7 +337,7 @@ function manejarCambioVista(nuevaVista) {
     color:#ccc;
     border: none;
     background-color: transparent;
-    font-size:1.3rem;
+    font-size:1.2rem;
     text-decoration: underline;
     transition: color 0.3s ease;
     align-items: flex-start;
@@ -300,7 +350,7 @@ function manejarCambioVista(nuevaVista) {
     color: #FF6347;
   }
   .dasboardSection{
-    padding: 2rem;
+    padding: 0rem;
     min-height: 100vh;
     
   }
@@ -323,12 +373,7 @@ function manejarCambioVista(nuevaVista) {
     
 
   }
-  .bloqueSalir{
-    padding: 1rem;
-    color:#f5f2f1;
-  
-
-  }
+ 
   .placeholder-card {
     padding: 1.5rem;
     border-radius: 12px;

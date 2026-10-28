@@ -34,10 +34,10 @@
 </template>
 <style scoped>
     .chart {
-        height: 100%; 
-        width: 100%; 
-        min-height: 350px;
-        max-height: 500px;
+        width: 100%;
+        height: 100%;
+        min-height: 270px;
+        max-height: 350px;
     }
 
 </style>

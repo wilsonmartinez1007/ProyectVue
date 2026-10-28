@@ -81,59 +81,58 @@
 </template>
 
 <style scoped>
-table {
-  border: none;
-  border-radius: 30px;
-  background-color: transparent;
-  width: 750px;
-}
+  table {
+    border: none;
+    background-color: #333;
+    width: 750px;
+  }
 
-th {
-  background-color: #ff6347ac;
-  color: rgba(255, 252, 252, 0.768);
-  font-size: 1.5rem;
-  cursor: pointer;
-  user-select: none;
-}
+  th {
+    background-color: #ff6347ac;
+    color: rgba(255, 252, 252, 0.768);
+    font-size: 1.5rem;
+    cursor: pointer;
+    user-select: none;
+  }
 
-td {
-  background-color: #888484;
-  color: rgb(18, 17, 17);
-  font-size: 1.2rem;
-}
+  td {
+    background-color: transparent;
+    color: rgb(236, 231, 231);
+    font-size: 1.2rem;
+  }
 
-th,
-td {
-  padding: 10px 20px;
-}
+  th,
+  td {
+    padding: 10px 20px;
+  }
 
-th.active {
-  color: #e8e5e5d3;
-}
+  th.active {
+    color: #e8e5e5d3;
+  }
 
 
-th.active .arrow {
-  opacity: 1;
-}
+  th.active .arrow {
+    opacity: 1;
+  }
 
-.arrow {
-  display: inline-block;
-  vertical-align: middle;
-  width: 0;
-  height: 0;
-  margin-left: 5px;
-  opacity: 0.66;
-}
+  .arrow {
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 0;
+    margin-left: 5px;
+    opacity: 0.66;
+  }
 
-.arrow.asc {
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-bottom: 4px solid #000000;
-}
+  .arrow.asc {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid #000000;
+  }
 
-.arrow.dsc {
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 4px solid #000000;
-}
+  .arrow.dsc {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #000000;
+  }
 </style>

@@ -92,17 +92,19 @@
     }
     .columna-tabla {
             flex: 1;
-            margin-top:1rem;
-            min-width: 0; /* Previene que la tabla se desborde fuera de la pantalla */
+            background-color: #333;
+            border-radius: 10px;
+            padding: 2rem;
+            min-height: 700px;
+            
             }
 
     .columna-formulario {
             width: 80%;
             position:relative;
-            margin-top: 3.1rem;
             margin-left: 230px;
             border-radius: 10px;
-            background-color:  #1e1e1e;
+            background-color:  #333;
             }
 
     

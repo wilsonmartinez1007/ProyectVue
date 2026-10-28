@@ -101,21 +101,22 @@ const clasificacion = computed(()=>({
         source:rotacionC.value??[]
      },
     legend: {
-     
-        left: 10,
-        textStyle:{color: 'white',fontSize:19,},
+        left: '40',
+        top:'170',
+        textStyle:{color: 'white',fontSize:14,},
         orient:'vertical',
             },
+             
     graphic:[
         {
             type:'text',
-            left:'56.7%',
-            top:'32%',
+            left:'58.7%',
+            top:'31%',
             style:{
                 text:`${porcentajeVisible.value}%`,
                 textAlign:'center',
                 textVerticalAlign: 'middle',
-                fontSize:24,
+                fontSize:17,
                 fontWeight: 'bold',
                 fill:'#fff9f9'
             }
@@ -126,7 +127,7 @@ const clasificacion = computed(()=>({
         { 
         name:'ventas',
         type: 'pie',
-        radius:['25%','45%'],
+        radius:['27%','55%'],
         center: ['61%', '33%'],
 
         encode:{
@@ -137,7 +138,10 @@ const clasificacion = computed(()=>({
     label: {
           show: true,
           fill:'#fff9f9',
-          textStyle:{color: 'white',fontSize:19,},
+          textStyle:{color: 'white',fontSize:12,},
+        },
+      labelLine:{
+           minTurnAngle: 90  
         },
       
     itemStyle:{
@@ -186,7 +190,7 @@ const ventasandPromedio = computed(()=>({
     type: 'value',
     name: 'Ventas por producto',
     nameTextStyle:{ color: 'white',
-                    fontSize:19,
+                    fontSize:11,
 
                     },
     color: 'white',
