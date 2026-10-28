@@ -46,7 +46,7 @@ function manejarCambioVista(nuevaVista) {
           <img :src="fondo" alt="Logo del proyecto" class="img">
           <div class="centrar">
             
-            <h1 class="titulo">SATLOCK</h1>
+            <h1 class="titulo">The Platforms</h1>
               <p class="texto">Holaa, aqui podras ver los graficos con la información de tus ventas  </p>
               <button class="botonC" @click="seccionActual='dasboard'">Mostrar graficos con charts</button>
               
@@ -64,7 +64,7 @@ function manejarCambioVista(nuevaVista) {
 
       <div class="dashboard-layout">
         <aside class="columna-radial">
-          <div class="tituloS"><img :src="satlock" alt="titulo prin"></div>
+          <div >The Platforms</div>
           
             <RadialMenu :sub-vista="subVistaActiva" @cambiarVista="manejarCambioVista"  />
         </aside>
