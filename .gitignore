@@ -32,6 +32,8 @@ backPhp/.php_cs.cache
 # Variables de entorno y configuraciones locales del Backend
 backPhp/.env
 backPhp/config.local.php
+# BD
+backPhp/models/mibase.db
 
 
 # =====================================================================

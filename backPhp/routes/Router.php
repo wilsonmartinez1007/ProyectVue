@@ -6,12 +6,18 @@ class Router{
     public function get(string $ruta, array $manejador): void{
         $this->rutas['GET'][$ruta] = $manejador;
     }
+    public function post(string $ruta, array $manejador):void{
+        $this->rutas['POST'][$ruta]= $manejador;
+    }
     public function delete(string $ruta, array $manejador): void{
         $this->rutas['DELETE'][$ruta] = $manejador;
 
     }
-    public function despachar(string $metodo, string $uri): void{
-        $path = parse_url($uri, PHP_URL_PATH);
+    public function put(string $ruta, array $manejador): void{
+        $this->rutas['PUT'][$ruta]= $manejador;
+    }
+    public function despachar(string $metodo, string $url): void{
+        $path = parse_url($url, PHP_URL_PATH);
         foreach($this->rutas[$metodo]??[] as $rutaDefinida => $manejador){
 
             //convierto la url en expresion regular para capturar numeros

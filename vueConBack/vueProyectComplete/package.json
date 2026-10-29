@@ -12,8 +12,11 @@
     "type-check": "vue-tsc --build"
   },
   "dependencies": {
+    "echarts": "^6.1.0",
     "pinia": "^4.0.3",
+    "pinia-plugin-persistedstate": "^4.7.1",
     "vue": "^3.5.42",
+    "vue-echarts": "^8.3.2",
     "vue-router": "^5.3.1",
     "vue-sonner": "^2.0.9"
   },
