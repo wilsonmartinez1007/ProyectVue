@@ -11,6 +11,7 @@
         <h4>Filtros disponibles:</h4>
         <label for="selectCiudad">Ciudad</label>
         <select id="selectCiudad" v-model="filtro">
+            <option value="Todas">Todas</option>
             <option v-for="item in Ciudad" >{{ item }}</option>
         </select>
     </div>
