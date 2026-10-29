@@ -4,6 +4,7 @@
     import {watch, computed } from 'vue';
     import { storeToRefs } from 'pinia'
     import { store } from '@/stores/store.ts'
+    import {Ciudad} from '@/types/ciudades'
 
     const productos = store()
     const {borradorFormulario:form} = storeToRefs(productos) 
@@ -57,7 +58,7 @@
     <div class="form-container">
         <div>
              
-            <h3>{{ esEdicion? 'Editar Producto':'Crear un producto' }}</h3>
+            <h3>{{ esEdicion? 'Editar Producto':'Crea tu producto' }}</h3>
             <button v-if="esEdicion" class="btn-nuevo" @click="limpiarFormulario">
                 Crear Producto
             </button>
@@ -88,8 +89,10 @@
                 
             </div>
             <div class="form-group">
-                <label >Ciudad</label>
-                <input v-model="form.ciudad" type="text" placeholder="Ej. Cali ve" required>
+                <label for="selectCiudad">Ciudad</label>
+                <select id="selectCiudad" v-model="form.ciudad">
+                    <option v-for="item in Ciudad" >{{ item }}</option>
+                </select>
                 
             </div>
             <div class="form-actions">
@@ -127,12 +130,22 @@
     .form-group{
         display: flex;
         flex-direction: column;
+        margin-top: 1rem;
         gap:0.4rem;
         margin-bottom: 1rem;
 
     }
     .form-group label {
         font-size:1.3rem;
+        text-align: start;
+        color:#ccc
+    }
+    .form-group select {
+        font-size:1.3rem;
+        width: 50%;
+        background-color:#292727;
+        border-radius: 5px;
+        border-top: .2rem solid #ff6347;
         text-align: start;
         color:#ccc
     }
@@ -174,8 +187,8 @@
     button:hover{
         opacity: 0.55;
     }
-    .btn-primary{background-color: #ff6347;color: #fff;}
+    .btn-primary{background-color: #d9534f;color: #fff;}
     .btn-warning{ background-color: #fafafa;color: #000;}
     .btn-danger {background-color: #d9534f; color: #000;}
-    .btn-nuevo{background-color: #333; color:#ccc; font-size: 1.3rem;padding: 0.3rem 0.6rem;margin-bottom: 1rem;}
+    .btn-nuevo{background-color: #d9534f; color:#ccc; font-size: 1.3rem;padding: 0.3rem 0.6rem;margin-bottom: 1.5rem;margin-top: 1rem;}
 </style>

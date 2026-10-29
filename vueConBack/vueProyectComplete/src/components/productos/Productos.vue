@@ -96,13 +96,14 @@
             border-radius: 10px;
             padding: 2rem;
             min-height: 700px;
+            margin-left: 5rem;
             
             }
 
     .columna-formulario {
             width: 80%;
             position:relative;
-            margin-left: 230px;
+            margin-left: 120px;
             border-radius: 10px;
             background-color:  #333;
             }

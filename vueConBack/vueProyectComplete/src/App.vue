@@ -12,7 +12,8 @@ import fondo from './assets/fondo.png'
 //
 //mostrar(tabla)/crear/editar/eliminar productos 
 import Productos from './components/productos/Productos.vue'
-
+//mostrar filtro
+import Filtrado from './components/filtro/Filtrado.vue'
 //radial
 import RadialMenu from '@/components/radial/RadialMenu.vue'
 
@@ -20,8 +21,9 @@ const uiStore = pluginStore()
 const {seccionActual,subVistaActiva} = storeToRefs(uiStore)
 
 const productos = store()
-const {produc, rotacionC, ventas, promedio, cargando} = storeToRefs(productos)
-const {option, clasificacion,ventasandPromedio,actualizarPorcentaje} = useProductosCharts(produc, rotacionC, ventas, promedio) 
+const { rotacionC, ventas, promedio, cargando, filtroCiudades} = storeToRefs(productos)
+
+const {option, clasificacion,ventasandPromedio,actualizarPorcentaje} = useProductosCharts(filtroCiudades, rotacionC, ventas, promedio) 
 
 onMounted(()=>{
   productos.cargar()
@@ -69,13 +71,16 @@ function manejarCambioVista(nuevaVista) {
 
       <div class="dashboard-layout">
         <aside class="columna-radial">
-          
-          
+            <i :class="{'invisible': subVistaActiva === 'inventario'}">
+              <Filtrado/></i>
+            
             <RadialMenu :sub-vista="subVistaActiva" @cambiarVista="manejarCambioVista"  />
+            
         </aside>
         
+        
         <main  class="columna-contenido">
-          <div class="divisionPantalla" v-if="subVistaActiva === 'graficos' && cargando=='Exito'">
+          <div class="divisionPantalla" v-if="subVistaActiva === 'graficos' && cargando=='Exito' && filtroCiudades.length>0">
               
               <div class="chart-containerVentas">
               <h2>Cantidad de ventas por Producto</h2>
@@ -114,6 +119,7 @@ function manejarCambioVista(nuevaVista) {
           
 
         </div>
+        <p v-else><div class="ciudadNoCompras">Esta ciudad no tiene compras registradas :() </div></p>
            
          
           
@@ -128,17 +134,36 @@ function manejarCambioVista(nuevaVista) {
       
         
          
-       
+       <footer class="barraAbajo"></footer>
         
     </section>
+    
     </div>
     
-
+    
 
   
 </template>
 
 <style scoped>
+.ciudadNoCompras{
+  margin-top: 30px;
+  color: #ccc;
+  font-size: 3rem;
+  margin-right: 50px;
+  min-height: 50vh;
+  padding: 2rem;
+  background-color: #55494725;
+  border-right: 3px solid #d9534f;
+}
+  .barraAbajo{
+    width: 100%!important;
+    height: 80px!important;
+    background-color: #333;
+  }
+  .invisible{
+    visibility: hidden;
+  }
   .titulo{
     width: 290px;
     font-size: 2rem;
@@ -163,8 +188,10 @@ function manejarCambioVista(nuevaVista) {
     border-left: 3px solid #ff6347;
     margin-left: 30px;
     margin-top: 19px;
-    position: sticky;
+    position:sticky;
     padding: 2rem;
+    margin-bottom: 50px;
+    min-height: 90vh!important;
     }
 
   .columna-contenido {
@@ -227,7 +254,6 @@ function manejarCambioVista(nuevaVista) {
     color:#f5f2f1;
     background-color: #333;
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-     border-radius: 10px;
   }
   .bloqueSalir{
     
@@ -236,7 +262,7 @@ function manejarCambioVista(nuevaVista) {
 
   }
   .bloqueSalir h2{
-    color: #ff6347;
+    color: #d9534f;
   }
   .bloqueSalir h4{
     margin-left: 70%;
@@ -254,7 +280,7 @@ function manejarCambioVista(nuevaVista) {
   .bloqueSalir button{
     width: 100px;
     height: 45px;
-    background-color:#b44936;
+    background-color:#d9534f;
     color: #ccc;
     border-radius: 10px;
     border: none;
@@ -276,7 +302,7 @@ function manejarCambioVista(nuevaVista) {
     border-radius: 12px;
     width: 96%;
     border: 1px solid #333;
-    max-height: 400px;
+    max-height: 440px;
   }
   
   .chart-containerIngreso {
@@ -284,42 +310,43 @@ function manejarCambioVista(nuevaVista) {
     border-radius: 12px;
     width: 96%;
     border: 1px solid #333;
-    max-height: 400px;
-    margin-bottom: 60px;
+    margin-top: 0px!important;
+    max-height: 490px;
+    margin-bottom: 20px;
   }
   .chart-containerRotacion h2 {
     margin-top:  3rem;
     margin-left: 2rem;
     font-size: 1rem;
     font-family:Arial, Helvetica, sans-serif;
-    color: #ff6347b3;
+    color: #d9534f;
   }
   .chart-containerIngreso h2 {
     margin-top:  3rem;
     margin-left: 2rem;
     font-size: 1rem;
     font-family:Arial, Helvetica, sans-serif;
-    color: #ff6347b3;
+    color:#d9534f;
   }
   .chart-containerVentas {
     background: #1e1e1e;
     border-radius: 12px;
     width: 96%;
     border: 1px solid #333;
-    max-height: 400px;
+    max-height: 430px;
   }
   .chart-containerVentas h2 {
     margin-top:  4rem;
     margin-left: 2rem;
     font-size: 1rem;
     font-family:Arial, Helvetica, sans-serif;
-    color: #ff6347b3;
+    color: #d9534f;
   }
  
   .centrar h1{
     font-size: 3rem;
     font-family:Arial, Helvetica, sans-serif;
-    color:#FF6347;
+    color:#d9534f;
     margin-left: 10px;
   }
   .columna-radial h1{
@@ -347,7 +374,7 @@ function manejarCambioVista(nuevaVista) {
 
   }
   .botonC:hover{
-    color: #FF6347;
+    color: #d9534f;
   }
   .dasboardSection{
     padding: 0rem;

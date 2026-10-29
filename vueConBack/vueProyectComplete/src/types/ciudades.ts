@@ -1,0 +1,1 @@
+export const Ciudad = ['Todas','Cali','Bogota','Pereira','Pasto','Medellin','Bucaramanga']

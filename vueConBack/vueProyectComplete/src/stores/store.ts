@@ -12,6 +12,15 @@ export const store = defineStore('producto',()=>{
     const borradorFormulario = ref<Producto[]>([])
     const searchQuery = ref('')
     const productoSeleccionado = ref(null)
+    const filtro = ref('Todas')
+   
+    const filtroCiudades = computed(()=>{
+        if(filtro.value ==='Todas') return produc.value
+        
+        console.log("Cali:"+ filtro.value)
+        return produc.value.filter(d=>d.ciudad === filtro.value)
+        
+    })
     
 
     const acumuladoVentas = computed(()=>{
@@ -22,7 +31,7 @@ export const store = defineStore('producto',()=>{
 
     const rotacionC =computed(()=>{
         if(acumuladoVentas.value>0){
-            return produc.value.map((c: Producto)=>({
+            return filtroCiudades.value.map((c: Producto)=>({
                 id: c.id,
                 name: c.name,
                 cantidad: Math.floor((c.cantidad/acumuladoVentas.value)*100*100)/100,
@@ -32,7 +41,7 @@ export const store = defineStore('producto',()=>{
     })
    
     const ventas = computed(()=>{
-        return produc.value.map((p:Producto)=>({
+        return filtroCiudades.value.map((p:Producto)=>({
             id: p.id,
             name: p.name,
             totalVentas:p.cantidad*p.price,
@@ -141,7 +150,9 @@ export const store = defineStore('producto',()=>{
         promedio,
         borradorFormulario,
         searchQuery,
-        productoSeleccionado
+        productoSeleccionado,
+        filtro,
+        filtroCiudades
     }
 },{
     persist:{

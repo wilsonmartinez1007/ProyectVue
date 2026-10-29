@@ -76,7 +76,7 @@
    
     </tbody>
    </table>
-   <p v-else> Nai NAI</p>
+   <p v-else> No existen productos</p>
 
 </template>
 
@@ -88,9 +88,9 @@
   }
 
   th {
-    background-color: #ff6347ac;
+    background-color: #d9534f;
     color: rgba(255, 252, 252, 0.768);
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     cursor: pointer;
     user-select: none;
   }

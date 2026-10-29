@@ -36,3 +36,4 @@ export const OPCIONES_RADIALES: OpcionRadial[] = [
     descripcionPreview: 'Consulta la lista completa de productos, crea nuevos registros, edita o elimina elementos.'
   }
 ]
+
