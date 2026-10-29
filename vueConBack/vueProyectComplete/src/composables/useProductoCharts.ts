@@ -138,7 +138,7 @@ const clasificacion = computed(()=>({
     label: {
           show: true,
           fill:'#fff9f9',
-          textStyle:{color: 'white',fontSize:12,},
+          textStyle:{color: 'white',fontSize:13,},
         },
       labelLine:{
            minTurnAngle: 90  
@@ -231,7 +231,7 @@ const ventasandPromedio = computed(()=>({
           show: true,
           position: 'end',
           formatter: `Promedio general (${(promedio.value)})`,
-          textStyle:{ color: '#fffdff', fontSize:11.3,fontWeight: 'bold',},
+          textStyle:{ color: '#fffdff', fontSize:11.5},
         },
         lineStyle:{
           color: '#d42542',

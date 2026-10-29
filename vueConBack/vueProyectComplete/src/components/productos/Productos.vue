@@ -29,7 +29,7 @@
         <!--izq-->
         <div class="columna-tabla">
             <div class="cbuscar">
-                <span>Puedes buscar cualquier columna </span>
+                <span>Puedes buscar cualquier informacion  </span>
                 <input name='query' v-model="searchQuery" class="busqueda" placeholder="Dijitando Aqui">
             </div>
             <DemoGrid
@@ -56,13 +56,10 @@
 </template>
 
 <style scoped>
-    .capaFormulario{
-        
-    }
+
     .busqueda{
         margin-top: 1.2rem;
         margin-bottom: 1rem;
-        max-width: 316px;
     }
     .modulo-productos{
         display: grid;
@@ -95,7 +92,8 @@
             background-color: #333;
             border-radius: 10px;
             padding: 2rem;
-            min-height: 700px;
+            min-height: 90vh;
+            margin-bottom: 50px;
             margin-left: 5rem;
             
             }
