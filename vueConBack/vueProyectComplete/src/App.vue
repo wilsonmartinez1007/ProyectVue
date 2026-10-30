@@ -35,6 +35,7 @@ function manejarCambioVista(nuevaVista) {
 }
 
 
+
 </script>
 
 <template>

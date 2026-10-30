@@ -13,14 +13,23 @@ export const store = defineStore('producto',()=>{
     const searchQuery = ref('')
     const productoSeleccionado = ref(null)
     const filtro = ref('Todas')
-   
+    const fecha = ref(false)
+    const hoy = new Date()
+    const desde = new Date(hoy)
+    desde.setDate(desde.getDate()-30)
+    const fecha30 = desde.toISOString().slice(0,10)
     const filtroCiudades = computed(()=>{
-        if(filtro.value ==='Todas') return produc.value
-        
-        console.log("Cali:"+ filtro.value)
-        return produc.value.filter(d=>d.ciudad === filtro.value)
-        
+        console.log(fecha.value)
+        return produc.value.filter(p => {
+            const cumpleCiudad = filtro.value === 'Todas' || p.ciudad === filtro.value
+            
+            const cumpleFecha = !fecha.value || p.fecha >= fecha30
+
+          
+            return cumpleCiudad && cumpleFecha
+  })
     })
+    
     
 
     const acumuladoVentas = computed(()=>{
@@ -152,7 +161,8 @@ export const store = defineStore('producto',()=>{
         searchQuery,
         productoSeleccionado,
         filtro,
-        filtroCiudades
+        filtroCiudades,
+        fecha
     }
 },{
     persist:{
